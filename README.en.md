@@ -21,6 +21,10 @@ Snowfall is a custom integration that adds an animated snowfall effect directly 
   </a>
 </p>
 
+> **IMPORTANT!:** This integration was put together quite informally for my own personal use. It’s based on a simple script I had saved alongside my Home Assistant setup, which was previously controlled by a basic on/off toggle. I decided to take it a step further by building a proper environment around the script and adding more flexible visual settings—going well beyond just a simple on/off switch. Please note that this integration hasn’t undergone full-scale testing; as a result, you might encounter issues with how the snow is rendered, the performance or battery life of the devices running the animation, or other unforeseen glitches. Rest assured, any bugs or issues that arise will be addressed as needed.
+
+> I plan to actively develop this integration further—moving beyond just snow animations to include other features, such as customizable colors and much more!✨
+
 ---
 
 ## Features
