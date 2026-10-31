@@ -1,295 +1,230 @@
-# Snowfall for Home Assistant
+# ❄️ Snowfall for Home Assistant
 
-Bring animated snowfall to your Home Assistant dashboard.
+Анимированный снег для вашего Home Assistant!
 
-**Snowfall** is a custom integration that adds a configurable animated snow effect to the Home Assistant frontend. Control snowfall manually with a switch, configure seasonal behavior, or let Home Assistant automations decide when the snow should appear.
+Добавьте атмосферу зимы на панели управления Home Assistant. Настраивайте снегопад под себя, управляйте им вручную или используйте автоматизации Home Assistant.
 
-## Features
+<p align="center">
+  <a href="#русский">🇷🇺 Русский</a> · <a href="#english">🇬🇧 English</a>
+</p>
 
-- Animated snowfall directly in the Home Assistant interface
-- Enable or disable snowfall using a dedicated switch
-- Three operating modes:
-  - **Always** — snowfall can be enabled at any time of the year
-  - **Winter** — snowfall is active only from December through February
-  - **Custom** — choose the months when snowfall is allowed
-- Adjustable snowflake count, speed, size, and opacity
-- Exclude specific dashboard pages from the effect
-- Configure everything through the Home Assistant UI
-- Use native Home Assistant automations for complete scheduling control
+<p align="center">
+  <img src="https://img.shields.io/badge/version-2026.10.1-blue" alt="Version">
+  <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS Custom Repository">
+  <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
+  <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
+</p>
 
-## Installation
+<p align="center">
+  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=alshevskij&repository=hass-snowfall&category=integration">
+    <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Добавить Snowfall в Home Assistant через HACS">
+  </a>
+</p>
 
-### HACS (Custom repository)
+---
 
-1. Open **HACS** in Home Assistant.
-2. Open the integrations section.
-3. Select the three-dot menu and choose **Custom repositories**.
-4. Add the repository URL:
+## 🇷🇺 Русский
 
-   `https://github.com/alshevskij/hass-snowfall`
+### Возможности
 
-5. Select **Integration** as the category.
-6. Click **Add**.
-7. Find **Snowfall for Home Assistant** in HACS and install it.
-8. Restart Home Assistant.
+- Анимированный снег непосредственно в интерфейсе Home Assistant.
+- Ручное управление снегопадом через отдельный переключатель.
+- Три режима работы: Always, Winter и Custom.
+- Настройка количества, скорости, размера и прозрачности снежинок.
+- Исключение отдельных страниц интерфейса из эффекта.
+- Настройка через графический интерфейс Home Assistant.
+- Поддержка встроенных автоматизаций Home Assistant для управления снегопадом.
 
-### Manual installation
+### Установка
 
-1. Download or clone this repository.
-2. Copy the `custom_components/snowfall` directory into your Home Assistant `custom_components` directory.
+**Установка через HACS**
+
+1. Убедитесь, что HACS установлен в Home Assistant.
+2. Нажмите на синюю кнопку **Добавить в Home Assistant** в верхней части этой страницы.
+3. Откроется ваш Home Assistant с репозиторием Snowfall в HACS.
+4. Подтвердите добавление пользовательского репозитория, если потребуется.
+5. Найдите Snowfall в HACS и установите интеграцию.
+6. Перезагрузите Home Assistant.
+
+Если кнопка не сработала, добавьте репозиторий вручную:
+
+`https://github.com/alshevskij/hass-snowfall`
+
+В HACS выберите категорию **Integration**.
+
+**Ручная установка**
+
+1. Скачайте репозиторий.
+2. Скопируйте папку `custom_components/snowfall` в каталог `custom_components` вашей установки Home Assistant.
+3. Перезагрузите Home Assistant.
+
+### Настройка
+
+После перезагрузки:
+
+1. Перейдите в **Настройки → Устройства и службы**.
+2. Нажмите **Добавить интеграцию**.
+3. Найдите **Snowfall for Home Assistant**.
+4. Завершите настройку.
+
+Дополнительные параметры доступны в настройках интеграции.
+
+### Параметры снегопада
+
+| Параметр | Описание |
+|---|---|
+| Режим работы | Always, Winter или Custom |
+| Активные месяцы | Выбор месяцев для режима Custom |
+| Количество снежинок | 10–300 |
+| Скорость | 25–200 |
+| Размер | 25–200 |
+| Прозрачность | 10–100 |
+| Исключённые страницы | Пути страниц, на которых снег не отображается |
+
+Исключённые пути указываются по одному на строку.
+
+### Режимы работы
+
+- **Always** — снегопад разрешён в любое время года.
+- **Winter** — снегопад разрешён с декабря по февраль.
+- **Custom** — снегопад разрешён только в выбранные месяцы.
+
+### Управление через Home Assistant
+
+Интеграция создаёт переключатель:
+
+`switch.snowfall`
+
+Он позволяет включать и выключать снегопад вручную, через панель управления, скрипты или автоматизации.
+
+#### Необязательно использовать сезонные режимы Snowfall
+
+Вы можете вообще не пользоваться встроенным расписанием по месяцам или зимним режимом.
+
+Для этого выберите **Always**, а расписание полностью настройте средствами самого Home Assistant.
+
+Просто автоматизируйте переключатель `switch.snowfall`:
+
+- Включайте снег в определённую дату.
+- Отключайте его весной.
+- Запускайте снегопад после захода солнца.
+- Включайте эффект только при нахождении дома.
+- Используйте любые другие условия и сценарии.
+
+Таким образом, Snowfall отвечает за визуальный эффект, а Home Assistant — за логику его включения и выключения.
+
+Документация: [Автоматизации Home Assistant](https://www.home-assistant.io/docs/automation/).
+
+### Поддержка
+
+Нашли ошибку или хотите предложить новую возможность?
+
+[Создать Issue на GitHub](https://github.com/alshevskij/hass-snowfall/issues).
+
+### Лицензия
+
+Проект распространяется под лицензией, указанной в файле [LICENSE](LICENSE).
+
+---
+
+## 🇬🇧 English
+
+### Features
+
+- Animated snowfall directly in the Home Assistant frontend.
+- Manual control through a dedicated switch.
+- Three operating modes: Always, Winter, and Custom.
+- Adjustable snowflake count, speed, size, and opacity.
+- Exclude specific dashboard pages from the effect.
+- Configure everything through the Home Assistant UI.
+- Native Home Assistant automation support.
+
+### Installation
+
+**Install via HACS**
+
+1. Make sure HACS is installed in Home Assistant.
+2. Click the **Add to Home Assistant** button at the top of this page.
+3. Your Home Assistant instance will open the Snowfall repository in HACS.
+4. Confirm adding the custom repository if prompted.
+5. Find Snowfall in HACS and install it.
+6. Restart Home Assistant.
+
+Alternatively, add the repository manually:
+
+`https://github.com/alshevskij/hass-snowfall`
+
+Select **Integration** as the category.
+
+**Manual installation**
+
+1. Download this repository.
+2. Copy `custom_components/snowfall` into your Home Assistant `custom_components` directory.
 3. Restart Home Assistant.
 
-Your directory structure should look like this:
+### Configuration
 
-```text
-config/
-└── custom_components/
-    └── snowfall/
-        ├── __init__.py
-        ├── manifest.json
-        ├── config_flow.py
-        ├── const.py
-        ├── switch.py
-        ├── frontend/
-        │   └── snowfall.js
-        └── translations/
-            ├── en.json
-            └── ru.json
-```
-
-## Configuration
-
-After restarting Home Assistant:
+After restarting:
 
 1. Go to **Settings → Devices & services**.
-2. Select **Add integration**.
+2. Click **Add integration**.
 3. Search for **Snowfall for Home Assistant**.
 4. Complete the setup.
 
-After installation, open the integration's options to configure the snowfall effect.
+Additional options are available in the integration settings.
 
-### Available settings
+### Snowfall settings
 
 | Setting | Description |
 |---|---|
 | Operating mode | Always, Winter, or Custom |
-| Active months | Select the months when snowfall is allowed (Custom mode) |
-| Snowflake count | Number of snowflakes (10–300) |
-| Speed | Snowfall speed (25–200) |
-| Size | Snowflake size (25–200) |
-| Opacity | Snowflake transparency (10–100) |
-| Excluded paths | Dashboard paths where snowfall should be hidden |
+| Active months | Select months for Custom mode |
+| Snowflake count | 10–300 |
+| Speed | 25–200 |
+| Size | 25–200 |
+| Opacity | 10–100 |
+| Excluded paths | Pages where snowfall is hidden |
 
-Excluded paths must be entered one per line.
+Enter excluded paths one per line.
 
-## Controlling snowfall
+### Operating modes
+
+- **Always** — snowfall is allowed throughout the year.
+- **Winter** — snowfall is allowed from December through February.
+- **Custom** — snowfall is allowed only during selected months.
+
+### Home Assistant control
 
 The integration creates a switch entity:
 
 `switch.snowfall`
 
-Use this switch to enable or disable the animated snowfall effect.
+Use it to manually enable or disable snowfall, add it to your dashboard, or control it through scripts and automations.
 
-You can add it to any Home Assistant dashboard, control it from scripts, or use it as an automation target.
+#### You don't have to use Snowfall's seasonal scheduling
 
-## Automation control
+You can skip the built-in monthly and winter scheduling entirely.
 
-You don't have to use the integration's seasonal modes to schedule snowfall.
+Simply select **Always** and let Home Assistant handle the schedule through its native automations.
 
-If you prefer, you can set the operating mode to **Always** and let Home Assistant handle all scheduling through its built-in automations.
+Automate `switch.snowfall` to:
 
-This means you can simply automate the `switch.snowfall` entity — no need to configure winter months or custom seasonal schedules inside the integration.
-
-For example, you can:
-
-- Turn snowfall on in December and off in January.
-- Enable snowfall at sunset and disable it in the morning.
+- Enable snowfall on a specific date.
+- Disable it when winter ends.
+- Start snowfall at sunset.
 - Show snow only when someone is at home.
-- Control snowfall based on weather conditions.
-- Create your own seasonal schedules or dashboard controls.
+- Use any other conditions and scenarios.
 
-In an automation, simply use the **Turn on** and **Turn off** actions for `switch.snowfall`.
+Snowfall handles the visual effect, while Home Assistant controls when it runs.
 
-This approach gives you complete flexibility: Snowfall handles the visual effect, while Home Assistant decides when it should run.
+Documentation: [Home Assistant Automations](https://www.home-assistant.io/docs/automation/).
 
-For more information, see the [Home Assistant automation documentation](https://www.home-assistant.io/docs/automation/).
+### Support
 
-## Seasonal modes explained
+Found a bug or have a feature request?
 
-**Always**
+[Open a GitHub Issue](https://github.com/alshevskij/hass-snowfall/issues).
 
-The integration does not restrict snowfall based on the month. The effect is controlled by the switch.
-
-**Winter**
-
-Snowfall is allowed during December, January, and February.
-
-**Custom**
-
-Choose the months during which snowfall is allowed.
-
-In all modes, the switch remains the main manual control for enabling and disabling the effect.
-
-## Requirements
-
-- Home Assistant
-- HACS (only if installing through HACS)
-
-## Support and issues
-
-If you encounter a problem or have a feature request, please open an issue:
-
-[GitHub Issues](https://github.com/alshevskij/hass-snowfall/issues)
-
-## License
+### License
 
 See the [LICENSE](LICENSE) file.
-
----
-
-# Snowfall for Home Assistant
-
-Добавьте анимированный снег на главную панель Home Assistant.
-
-**Snowfall** — пользовательская интеграция, которая добавляет на интерфейс Home Assistant настраиваемый эффект падающего снега. Управляйте снегопадом вручную с помощью переключателя, настройте сезонную работу или полностью доверьте расписание встроенным автоматизациям Home Assistant.
-
-## Возможности
-
-- Анимированный снег непосредственно в интерфейсе Home Assistant
-- Включение и выключение снегопада с помощью отдельного переключателя
-- Три режима работы:
-  - **Always** — снегопад можно включить в любое время года
-  - **Winter** — снегопад работает только с декабря по февраль
-  - **Custom** — выбор месяцев, в которые разрешён снегопад
-- Настройка количества, скорости, размера и прозрачности снежинок
-- Исключение отдельных страниц интерфейса из эффекта
-- Настройка через графический интерфейс Home Assistant
-- Возможность полностью управлять расписанием через встроенные автоматизации Home Assistant
-
-## Установка
-
-### HACS (пользовательский репозиторий)
-
-1. Откройте **HACS** в Home Assistant.
-2. Перейдите в раздел интеграций.
-3. Откройте меню с тремя точками и выберите **Custom repositories**.
-4. Добавьте ссылку на репозиторий:
-
-   `https://github.com/alshevskij/hass-snowfall`
-
-5. В качестве категории выберите **Integration**.
-6. Нажмите **Add**.
-7. Найдите **Snowfall for Home Assistant** в HACS и установите интеграцию.
-8. Перезагрузите Home Assistant.
-
-### Ручная установка
-
-1. Скачайте или клонируйте этот репозиторий.
-2. Скопируйте папку `custom_components/snowfall` в каталог `custom_components` вашей установки Home Assistant.
-3. Перезагрузите Home Assistant.
-
-Структура каталогов должна выглядеть следующим образом:
-
-```text
-config/
-└── custom_components/
-    └── snowfall/
-        ├── __init__.py
-        ├── manifest.json
-        ├── config_flow.py
-        ├── const.py
-        ├── switch.py
-        ├── frontend/
-        │   └── snowfall.js
-        └── translations/
-            ├── en.json
-            └── ru.json
-```
-
-## Настройка
-
-После перезагрузки Home Assistant:
-
-1. Перейдите в **Настройки → Устройства и службы**.
-2. Нажмите **Добавить интеграцию**.
-3. Найдите **Snowfall for Home Assistant**.
-4. Завершите установку.
-
-После добавления интеграции откройте её параметры, чтобы настроить эффект снегопада.
-
-### Доступные параметры
-
-| Параметр | Описание |
-|---|---|
-| Режим работы | Always, Winter или Custom |
-| Активные месяцы | Выбор месяцев, когда разрешён снегопад (режим Custom) |
-| Количество снежинок | Количество снежинок (10–300) |
-| Скорость | Скорость падения (25–200) |
-| Размер | Размер снежинок (25–200) |
-| Прозрачность | Прозрачность снежинок (10–100) |
-| Исключённые страницы | Пути страниц, на которых снегопад не отображается |
-
-Каждый исключённый путь необходимо указывать с новой строки.
-
-## Управление снегопадом
-
-Интеграция создаёт сущность переключателя:
-
-`switch.snowfall`
-
-С помощью неё можно включать и выключать анимированный снегопад.
-
-Добавьте переключатель на любую панель Home Assistant, управляйте им из скриптов или используйте в автоматизациях.
-
-## Управление через автоматизации
-
-Использовать сезонные режимы самой интеграции необязательно.
-
-Если вам удобнее самостоятельно управлять расписанием, установите режим **Always** и поручите всю логику встроенным автоматизациям Home Assistant.
-
-В этом случае достаточно автоматизировать обычное включение и выключение сущности `switch.snowfall` — настраивать зимние месяцы или отдельное сезонное расписание внутри интеграции не потребуется.
-
-Например, можно:
-
-- Включать снегопад в декабре и выключать в январе.
-- Запускать снег вечером и отключать утром.
-- Показывать снег только тогда, когда кто-то находится дома.
-- Управлять снегопадом в зависимости от погодных условий.
-- Создавать собственные сезонные расписания и элементы управления на панели.
-
-В автоматизации достаточно использовать действия **Turn on** и **Turn off** для `switch.snowfall`.
-
-Такой подход даёт полную свободу: Snowfall отвечает за визуальный эффект, а Home Assistant самостоятельно решает, когда он должен работать.
-
-Подробнее: [Документация по автоматизациям Home Assistant](https://www.home-assistant.io/docs/automation/).
-
-## Режимы работы
-
-**Always**
-
-Интеграция не ограничивает снегопад по месяцам. Эффект управляется переключателем.
-
-**Winter**
-
-Снегопад разрешён в декабре, январе и феврале.
-
-**Custom**
-
-Вы самостоятельно выбираете месяцы, в которые разрешён снегопад.
-
-В любом режиме переключатель остаётся основным способом ручного включения и выключения эффекта.
-
-## Требования
-
-- Home Assistant
-- HACS (только для установки через HACS)
-
-## Поддержка и сообщения об ошибках
-
-Если вы столкнулись с проблемой или хотите предложить новую функцию, создайте обращение:
-
-[GitHub Issues](https://github.com/alshevskij/hass-snowfall/issues)
-
-## Лицензия
-
-См. файл [LICENSE](LICENSE).
