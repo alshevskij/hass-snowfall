@@ -1,0 +1,28 @@
+"""Constants for Snowfall."""
+
+DOMAIN = "snowfall"
+
+FRONTEND_URL = "/snowfall"
+JS_URL = f"{FRONTEND_URL}/snowfall.js?v=2026.10.1"
+
+CONF_MODE = "mode"
+CONF_MONTHS = "months"
+CONF_EXCLUDED_PATHS = "excluded_paths"
+CONF_FLAKE_COUNT = "flake_count"
+CONF_SPEED = "speed"
+CONF_SIZE = "size"
+CONF_OPACITY = "opacity"
+
+MODE_ALWAYS = "always"
+MODE_WINTER = "winter"
+MODE_CUSTOM = "custom"
+
+DEFAULTS = {
+    CONF_MODE: MODE_ALWAYS,
+    CONF_MONTHS: [12, 1, 2],
+    CONF_EXCLUDED_PATHS: [],
+    CONF_FLAKE_COUNT: 120,
+    CONF_SPEED: 100,
+    CONF_SIZE: 100,
+    CONF_OPACITY: 85,
+}

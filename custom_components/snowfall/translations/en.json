@@ -1,0 +1,77 @@
+
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Snowfall",
+        "description": "Add Snowfall to Home Assistant. You can configure the animation after setup."
+      }
+    },
+    "abort": {
+      "already_configured": "Snowfall is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Snowfall schedule",
+        "description": "Choose when the snowfall effect should appear.",
+        "data": {
+          "mode": "Snowfall schedule"
+        }
+      },
+      "settings": {
+        "title": "Animation settings",
+        "description": "Customize the appearance and behavior of the snowflakes.",
+        "data": {
+          "months": "Active months",
+          "excluded_paths": "Excluded pages",
+          "flake_count": "Snowflake count",
+          "speed": "Fall speed",
+          "size": "Snowflake size",
+          "opacity": "Opacity"
+        },
+        "data_description": {
+          "months": "Choose the months when snowfall should be active.",
+          "excluded_paths": "Enter one page path per line. Snowfall will be hidden on these pages. Leave empty to show snow everywhere.",
+          "flake_count": "Controls the density of the snowfall.",
+          "speed": "Controls how fast snowflakes fall.",
+          "size": "Controls the size of individual snowflakes.",
+          "opacity": "Controls how visible the snowflakes are."
+        }
+      }
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "winter": "Winter season (December–February)",
+        "custom": "Choose months",
+        "always": "All year"
+      }
+    },
+    "months": {
+      "options": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "snowfall": {
+        "name": "Snowfall"
+      }
+    }
+  }
+}

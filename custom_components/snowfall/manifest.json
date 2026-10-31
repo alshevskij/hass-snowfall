@@ -1,0 +1,17 @@
+{
+  "domain": "snowfall",
+  "name": "Snowfall for Home Assistant",
+  "codeowners": [
+    "@alshevskij"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend"
+  ],
+  "documentation": "https://github.com/alshevskij/hass-snowfall",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "2026.10.1"
+}
