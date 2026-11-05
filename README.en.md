@@ -56,6 +56,23 @@ In HACS, select the **Integration** category.
 2. Copy the `custom_components/snowfall` folder to the `custom_components` directory of your Home Assistant.
 3. Restart Home Assistant.
 
+## Devices and settings profiles
+
+The integration creates three logical Home Assistant devices:
+
+- **Snowfall** — global controls: enable/disable the effect, snowfall schedule, device settings mode, and page allow/block lists.
+- **Snowfall Desktop** — visual settings for computers: flake count, speed, size and opacity, appearance, intensity preset, wind, and FPS.
+- **Snowfall Mobile** — an independent set of the same visual settings for phones and tablets.
+
+The **Device settings mode** selector provides two options:
+
+- **Shared settings for all devices** — every browser uses the Snowfall Desktop profile. Snowfall Mobile controls are automatically hidden, while their saved values are preserved.
+- **Separate device settings** — computers use Snowfall Desktop, while phones and tablets use Snowfall Mobile. The client type is detected in the browser.
+
+During the update, existing visual settings are migrated to the Desktop profile. Existing entity IDs are preserved, so previously configured cards and automations should not need to be rebuilt. A separate Mobile profile is initialized with default values.
+
+Internal profile sensors are used by the integration's JavaScript renderer and are hidden from the regular entity list.
+
 ## Configuration and integration entities:
 
 The main snowfall switch, added in version 2026.10.1, retains the previous ID `switch.snowfall`.
