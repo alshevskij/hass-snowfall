@@ -63,7 +63,7 @@
         }
       }
     },
-    "number": {
+    "sensor": {\n      "profile": { "name": "Профиль настроек" }\n    },\n    "number": {
       "flake_count": {"name": "Количество снежинок"},
       "speed": {"name": "Скорость падения"},
       "size": {"name": "Размер снежинок"},
