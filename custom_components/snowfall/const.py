@@ -3,7 +3,7 @@
 DOMAIN = "snowfall"
 
 FRONTEND_URL = "/snowfall"
-JS_URL = f"{FRONTEND_URL}/snowfall.js?v=2026.11.3"
+JS_URL = f"{FRONTEND_URL}/snowfall.js?v=2026.11.4"
 
 CONF_MODE = "mode"
 CONF_MONTHS = "months"
