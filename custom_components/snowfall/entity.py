@@ -94,7 +94,6 @@ def update_mobile_entities_visibility(
             PROFILE_SETTING_KEYS[6],
             PROFILE_SETTING_KEYS[8],
         ),
-        "sensor": ("profile",),
     }
     for domain, keys in domains.items():
         for key in keys:
