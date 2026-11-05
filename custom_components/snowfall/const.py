@@ -3,7 +3,7 @@
 DOMAIN = "snowfall"
 
 FRONTEND_URL = "/snowfall"
-JS_URL = f"{FRONTEND_URL}/snowfall.js?v=2026.11.4"
+JS_URL = f"{FRONTEND_URL}/snowfall.js?v=2026.11.3"
 
 CONF_MODE = "mode"
 CONF_MONTHS = "months"
@@ -26,6 +26,8 @@ MODE_CUSTOM = "custom"
 
 FPS_30 = "30"
 FPS_60 = "60"
+FPS_90 = "90"
+FPS_120 = "120"
 
 FLAKE_STYLE_DOTS = "dots"
 FLAKE_STYLE_SNOWFLAKES = "snowflakes"
