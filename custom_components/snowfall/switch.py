@@ -48,11 +48,10 @@ class SnowfallSwitch(SnowfallEntityMixin, RestoreEntity, SwitchEntity):
         self._attr_is_on = False
 
     async def async_added_to_hass(self) -> None:
-        """Restore the previous switch state and subscribe to settings."""
+        """Restore the previous switch state."""
         await super().async_added_to_hass()
         if (last_state := await self.async_get_last_state()) is not None:
             self._attr_is_on = last_state.state == "on"
-        self._subscribe_to_updates()
 
     @property
     def extra_state_attributes(self) -> dict:
@@ -85,7 +84,6 @@ class SnowfallMonthSwitch(SnowfallEntityMixin, SwitchEntity):
     """Switch for an individual active month."""
 
     _attr_has_entity_name = True
-    _attr_entity_category = None
     _attr_icon = "mdi:calendar-month"
 
     def __init__(self, entry: ConfigEntry, month: int) -> None:
@@ -98,16 +96,30 @@ class SnowfallMonthSwitch(SnowfallEntityMixin, SwitchEntity):
     def is_on(self) -> bool:
         """Return whether this month is enabled."""
         months = self._options.get(CONF_MONTHS, DEFAULTS[CONF_MONTHS])
-        return self._month in months
+        return self._month in {int(month) for month in months}
 
     async def async_turn_on(self, **kwargs) -> None:
         """Enable this month."""
-        months = set(self._options.get(CONF_MONTHS, DEFAULTS[CONF_MONTHS]))
+        months = {
+            int(month)
+            for month in self._options.get(CONF_MONTHS, DEFAULTS[CONF_MONTHS])
+        }
         months.add(self._month)
-        await update_options(self.hass, self._entry, {CONF_MONTHS: sorted(months)})
+        await update_options(
+            self.hass,
+            self._entry,
+            {CONF_MONTHS: sorted(months)},
+        )
 
     async def async_turn_off(self, **kwargs) -> None:
         """Disable this month."""
-        months = set(self._options.get(CONF_MONTHS, DEFAULTS[CONF_MONTHS]))
+        months = {
+            int(month)
+            for month in self._options.get(CONF_MONTHS, DEFAULTS[CONF_MONTHS])
+        }
         months.discard(self._month)
-        await update_options(self.hass, self._entry, {CONF_MONTHS: sorted(months)})
+        await update_options(
+            self.hass,
+            self._entry,
+            {CONF_MONTHS: sorted(months)},
+        )
