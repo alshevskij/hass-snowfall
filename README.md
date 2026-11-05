@@ -14,7 +14,6 @@ Snowfall - пользовательская интеграция, которая
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
 </p>
----
 
 ## Текущие возможности интеграции:
 
