@@ -23,7 +23,8 @@ from .const import (
     DEVICE_MODE_SEPARATE,
     DOMAIN,
     MONTHS,
-    PROFILE_SETTING_KEYS,
+    PROFILE_NUMBER_KEYS,
+    PROFILE_SELECT_KEYS,
     CONF_DEVICE_MODE,
     MODE_CUSTOM,
     CONF_MODE,
@@ -80,20 +81,8 @@ def update_mobile_entities_visibility(
         == DEVICE_MODE_SEPARATE
     )
     domains = {
-        "number": (
-            PROFILE_SETTING_KEYS[0],
-            PROFILE_SETTING_KEYS[1],
-            PROFILE_SETTING_KEYS[2],
-            PROFILE_SETTING_KEYS[3],
-            PROFILE_SETTING_KEYS[7],
-            PROFILE_SETTING_KEYS[9],
-        ),
-        "select": (
-            PROFILE_SETTING_KEYS[4],
-            PROFILE_SETTING_KEYS[5],
-            PROFILE_SETTING_KEYS[6],
-            PROFILE_SETTING_KEYS[8],
-        ),
+        "number": PROFILE_NUMBER_KEYS,
+        "select": PROFILE_SELECT_KEYS,
     }
     for domain, keys in domains.items():
         for key in keys:
