@@ -92,7 +92,7 @@
       speed: clamp(a.speed, 25, 200, defaults.speed),
       size: clamp(a.size, 25, 200, defaults.size),
       opacity: clamp(a.opacity, 10, 100, defaults.opacity),
-      fps: clamp(a.fps, 30, 60, defaults.fps),
+      fps: clamp(a.fps, 30, 120, defaults.fps),
       flake_style: a.flake_style ?? defaults.flake_style,
       preset: a.preset ?? defaults.preset,
       wind_strength: clamp(a.wind_strength, 0, 100, defaults.wind_strength),
