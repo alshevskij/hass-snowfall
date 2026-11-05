@@ -15,7 +15,7 @@ Snowfall - пользовательская интеграция, которая
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
 </p>
 
-<p>
+<p align=center>
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=alshevskij&repository=hass-snowfall&category=integration">
     <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Добавить Snowfall в Home Assistant через HACS">
   </a>
