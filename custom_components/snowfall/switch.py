@@ -12,6 +12,11 @@ from .const import (
     CONF_EXCLUDED_PATHS,
     CONF_FLAKE_COUNT,
     CONF_FPS,
+    CONF_FLAKE_STYLE,
+    CONF_PRESET,
+    CONF_WIND_DIRECTION,
+    CONF_WIND_GUSTS,
+    CONF_WIND_STRENGTH,
     CONF_INCLUDED_PATHS,
     CONF_MODE,
     CONF_MONTHS,
@@ -71,6 +76,11 @@ class SnowfallSwitch(SnowfallEntityMixin, RestoreEntity, SwitchEntity):
             CONF_SIZE: options[CONF_SIZE],
             CONF_OPACITY: options[CONF_OPACITY],
             CONF_FPS: options[CONF_FPS],
+            CONF_FLAKE_STYLE: options[CONF_FLAKE_STYLE],
+            CONF_PRESET: options[CONF_PRESET],
+            CONF_WIND_STRENGTH: options[CONF_WIND_STRENGTH],
+            CONF_WIND_DIRECTION: options[CONF_WIND_DIRECTION],
+            CONF_WIND_GUSTS: options[CONF_WIND_GUSTS],
         }
 
     async def async_turn_on(self, **kwargs) -> None:
