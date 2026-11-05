@@ -80,7 +80,7 @@ class SnowfallEntityMixin:
             name="Snowfall",
             manufacturer="ALSHEVSKIJ",
             model="Home Assistant FX",
-            sw_version="2026.11.4",
+            sw_version="2026.11.3",
         )
 
     @property
