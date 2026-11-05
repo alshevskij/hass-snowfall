@@ -60,7 +60,7 @@
       return value.filter((path) => typeof path === "string");
     }
     if (typeof value === "string") {
-      return value.split(/[,;\\n]+/).map((path) => path.trim()).filter(Boolean);
+      return value.split(/[,;\n]+/).map((path) => path.trim()).filter(Boolean);
     }
     return [];
   };
@@ -101,7 +101,7 @@
   };
 
   const pathMatches = (path, rule) => {
-    const normalized = rule.trim().replace(/\\/+$/, "") || "/";
+    const normalized = rule.trim().replace(new RegExp("/+$"), "") || "/";
     return path === normalized || path.startsWith(
       normalized === "/" ? "/" : `${normalized}/`
     );
