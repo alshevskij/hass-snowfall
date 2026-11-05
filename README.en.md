@@ -90,7 +90,7 @@ In version 2026.11.3, snowfall control has been moved to a full set of Home Assi
 - Added snowflake appearance styles: dots, six-armed snowflakes, crystals and mixed.
 - Added snowfall intensity presets. They scale particle density and animation speed without overwriting manual slider values.
 - Added wind physics: direction, strength and gusts affect the horizontal movement of each snowflake.
-- A rendering frequency limit of 30/60 FPS has been added to control the autonomy of your devices in which it is snowing.
+- A rendering frequency limit of 30/60/90/120 FPS has been added to control rendering performance and power consumption on devices displaying the snowfall.
 - Previously saved parameters from Options Flow are transferred to new entities during an update, so your existing settings should not be reset.
 
 ## White and black lists of pages:
