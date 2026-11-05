@@ -1,5 +1,8 @@
 (() => {
-  if (window.__haSnowfallLoaded) return;
+  // Stop a previously injected instance before installing the updated renderer.
+  if (typeof window.__haSnowfallCleanup === "function") {
+    window.__haSnowfallCleanup();
+  }
   window.__haSnowfallLoaded = true;
 
   const ENTITY = "switch.snowfall";
@@ -41,6 +44,20 @@
   let flakes = [], lastCount = -1, lastStyle = "";
   let lastSettingsUpdate = 0, lastFrameTime = 0;
   let animationFrame = null, isVisible = false;
+
+  const cleanup = () => {
+    if (animationFrame !== null) {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+    window.removeEventListener("resize", resize);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    canvas.remove();
+    window.__haSnowfallLoaded = false;
+    window.__haSnowfallCleanup = null;
+  };
+
+  window.__haSnowfallCleanup = cleanup;
 
   const clamp = (value, min, max, fallback) => {
     const number = Number(value);
