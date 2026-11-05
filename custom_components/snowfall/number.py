@@ -10,7 +10,15 @@ from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import CONF_FLAKE_COUNT, CONF_OPACITY, CONF_SIZE, CONF_SPEED, DEFAULTS
+from .const import (
+    CONF_FLAKE_COUNT,
+    CONF_OPACITY,
+    CONF_SIZE,
+    CONF_SPEED,
+    CONF_WIND_GUSTS,
+    CONF_WIND_STRENGTH,
+    DEFAULTS,
+)
 from .entity import SnowfallEntityMixin, update_options
 
 
@@ -33,6 +41,12 @@ SETTINGS = (
     NumberSetting(CONF_SPEED, "speed", 25, 200, 5, "mdi:speedometer"),
     NumberSetting(CONF_SIZE, "size", 25, 200, 5, "mdi:arrow-expand"),
     NumberSetting(CONF_OPACITY, "opacity", 10, 100, 5, "mdi:opacity"),
+    NumberSetting(
+        CONF_WIND_STRENGTH, "wind_strength", 0, 100, 5, "mdi:weather-windy"
+    ),
+    NumberSetting(
+        CONF_WIND_GUSTS, "wind_gusts", 0, 100, 5, "mdi:weather-windy-variant"
+    ),
 )
 
 
