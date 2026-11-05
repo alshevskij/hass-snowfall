@@ -5,7 +5,6 @@ from __future__ import annotations
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -89,7 +88,6 @@ class SnowfallMonthSwitch(SnowfallEntityMixin, SwitchEntity):
     """Switch for an individual active month."""
 
     _attr_has_entity_name = True
-    _attr_entity_category = EntityCategory.CONFIG
     _attr_icon = "mdi:calendar-month"
     _attr_entity_registry_visible_default = False
 
