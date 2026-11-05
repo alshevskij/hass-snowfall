@@ -7,13 +7,15 @@ from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.dispatcher import (
     async_dispatcher_connect,
     async_dispatcher_send,
 )
+from homeassistant.helpers.entity_registry import RegistryEntryHider
 
-from .const import DEFAULTS, DOMAIN
+from .const import DEFAULTS, DOMAIN, MODE_CUSTOM, MONTHS
 
 SIGNAL_SETTINGS_UPDATED = f"{DOMAIN}_settings_updated"
 
@@ -30,6 +32,34 @@ async def update_options(
         hass,
         f"{SIGNAL_SETTINGS_UPDATED}_{entry.entry_id}",
     )
+
+
+@callback
+def update_month_entities_visibility(
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+) -> None:
+    """Show month switches only while custom scheduling is selected."""
+    registry = er.async_get(hass)
+    visible = entry.options.get("mode", DEFAULTS["mode"]) == MODE_CUSTOM
+
+    for month in MONTHS:
+        unique_id = f"{entry.entry_id}_month_{month}"
+        entity_id = registry.async_get_entity_id("switch", DOMAIN, unique_id)
+        if entity_id is None:
+            continue
+
+        registry_entry = registry.async_get(entity_id)
+        if registry_entry is None:
+            continue
+
+        # Respect an explicit visibility choice made by the user.
+        if registry_entry.hidden_by == RegistryEntryHider.USER:
+            continue
+
+        hidden_by = None if visible else RegistryEntryHider.INTEGRATION
+        if registry_entry.hidden_by != hidden_by:
+            registry.async_update_entity(entity_id, hidden_by=hidden_by)
 
 
 class SnowfallEntityMixin:
@@ -49,8 +79,8 @@ class SnowfallEntityMixin:
             identifiers={(DOMAIN, self._entry.entry_id)},
             name="Snowfall",
             manufacturer="ALSHEVSKIJ",
-            model="Home Assistant frontend snowfall effect",
-            sw_version="2026.11.2",
+            model="Home Assistant FX",
+            sw_version="2026.11.3",
         )
 
     @property
@@ -65,7 +95,7 @@ class SnowfallEntityMixin:
 
     @callback
     def _subscribe_to_updates(self) -> None:
-        """Write state when shared settings change."""
+        """Subscribe to settings changes."""
         self.async_on_remove(
             async_dispatcher_connect(
                 self.hass,
