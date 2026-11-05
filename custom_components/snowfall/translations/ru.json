@@ -12,19 +12,45 @@
   },
   "entity": {
     "switch": {
-      "snowfall": {"name": "Снегопад"},
-      "month_1": {"name": "Январь"},
-      "month_2": {"name": "Февраль"},
-      "month_3": {"name": "Март"},
-      "month_4": {"name": "Апрель"},
-      "month_5": {"name": "Май"},
-      "month_6": {"name": "Июнь"},
-      "month_7": {"name": "Июль"},
-      "month_8": {"name": "Август"},
-      "month_9": {"name": "Сентябрь"},
-      "month_10": {"name": "Октябрь"},
-      "month_11": {"name": "Ноябрь"},
-      "month_12": {"name": "Декабрь"}
+      "snowfall": {
+        "name": "Снегопад"
+      },
+      "month_1": {
+        "name": "Январь"
+      },
+      "month_2": {
+        "name": "Февраль"
+      },
+      "month_3": {
+        "name": "Март"
+      },
+      "month_4": {
+        "name": "Апрель"
+      },
+      "month_5": {
+        "name": "Май"
+      },
+      "month_6": {
+        "name": "Июнь"
+      },
+      "month_7": {
+        "name": "Июль"
+      },
+      "month_8": {
+        "name": "Август"
+      },
+      "month_9": {
+        "name": "Сентябрь"
+      },
+      "month_10": {
+        "name": "Октябрь"
+      },
+      "month_11": {
+        "name": "Ноябрь"
+      },
+      "month_12": {
+        "name": "Декабрь"
+      }
     },
     "select": {
       "device_mode": {
@@ -42,7 +68,9 @@
           "custom": "Выбор месяцев"
         }
       },
-      "fps": {"name": "Частота кадров"},
+      "fps": {
+        "name": "Частота кадров"
+      },
       "flake_style": {
         "name": "Внешний вид снежинок",
         "state": {
@@ -71,19 +99,40 @@
       }
     },
     "sensor": {
-      "profile": { "name": "Профиль настроек" }
+      "desktop_profile": {
+        "name": "Snowfall Desktop Profile"
+      },
+      "mobile_profile": {
+        "name": "Snowfall Mobile Profile"
+      }
     },
     "number": {
-      "flake_count": {"name": "Количество снежинок"},
-      "speed": {"name": "Скорость падения"},
-      "size": {"name": "Размер снежинок"},
-      "opacity": {"name": "Прозрачность"},
-      "wind_strength": {"name": "Сила ветра"},
-      "wind_gusts": {"name": "Порывы ветра"}
+      "flake_count": {
+        "name": "Количество снежинок"
+      },
+      "speed": {
+        "name": "Скорость падения"
+      },
+      "size": {
+        "name": "Размер снежинок"
+      },
+      "opacity": {
+        "name": "Прозрачность"
+      },
+      "wind_strength": {
+        "name": "Сила ветра"
+      },
+      "wind_gusts": {
+        "name": "Порывы ветра"
+      }
     },
     "text": {
-      "excluded_paths": {"name": "Чёрный список страниц"},
-      "included_paths": {"name": "Белый список страниц"}
+      "excluded_paths": {
+        "name": "Чёрный список страниц"
+      },
+      "included_paths": {
+        "name": "Белый список страниц"
+      }
     }
   }
 }
