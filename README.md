@@ -44,6 +44,7 @@ Snowfall - пользовательская интеграция, которая
     <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Добавить Snowfall в Home Assistant через HACS">
   </a>
 </p>
+
 3. Откройте репозиторий Snowfall в HACS и подтвердите добавление пользовательского репозитория.
 4. Найдите Snowfall и установите интеграцию.
 5. Перезагрузите Home Assistant.
