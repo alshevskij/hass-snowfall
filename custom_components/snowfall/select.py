@@ -18,7 +18,11 @@ from .const import (
     MODE_CUSTOM,
     MODE_WINTER,
 )
-from .entity import SnowfallEntityMixin, update_options
+from .entity import (
+    SnowfallEntityMixin,
+    update_month_entities_visibility,
+    update_options,
+)
 
 
 async def async_setup_entry(
@@ -51,6 +55,7 @@ class SnowfallModeSelect(SnowfallEntityMixin, SelectEntity):
     async def async_select_option(self, option: str) -> None:
         """Change the snowfall schedule."""
         await update_options(self.hass, self._entry, {CONF_MODE: option})
+        update_month_entities_visibility(self.hass, self._entry)
 
 
 class SnowfallFpsSelect(SnowfallEntityMixin, SelectEntity):
@@ -63,7 +68,7 @@ class SnowfallFpsSelect(SnowfallEntityMixin, SelectEntity):
     _attr_options = [FPS_30, FPS_60]
 
     def __init__(self, entry: ConfigEntry) -> None:
-        """Initialize the FPS selector."""
+        """Initialize the frame-rate selector."""
         self._init_snowfall(entry, "fps")
 
     @property
