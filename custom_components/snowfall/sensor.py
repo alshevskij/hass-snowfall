@@ -42,7 +42,7 @@ class SnowfallProfileSensor(SnowfallEntityMixin, SensorEntity):
 
     def __init__(self, entry: ConfigEntry, device_role: str) -> None:
         self._device_role = device_role
-        self._attr_translation_key = f"{device_role}_profile"
+        self._attr_translation_key = "profile"
         self._init_snowfall(entry, f"{device_role}_profile", device_role)
 
     @property
