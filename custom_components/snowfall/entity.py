@@ -7,9 +7,12 @@ from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers.dispatcher import async_dispatcher_connect, async_dispatcher_send
+from homeassistant.helpers.dispatcher import (
+    async_dispatcher_connect,
+    async_dispatcher_send,
+)
 
-from .const import DOMAIN
+from .const import DEFAULTS, DOMAIN
 
 SIGNAL_SETTINGS_UPDATED = f"{DOMAIN}_settings_updated"
 
@@ -41,8 +44,6 @@ class SnowfallEntityMixin:
     @property
     def _options(self) -> dict[str, Any]:
         """Return current options, including defaults for older entries."""
-        from .const import DEFAULTS
-
         return {**DEFAULTS, **self._entry.options}
 
     async def async_added_to_hass(self) -> None:
