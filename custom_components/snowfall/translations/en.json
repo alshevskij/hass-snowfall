@@ -57,8 +57,8 @@
       "wind_direction": {
         "name": "Wind direction",
         "state": {
-          "left": "Left to right",
-          "right": "Right to left",
+          "left": "To the left",
+          "right": "To the right",
           "variable": "Variable wind"
         }
       }
