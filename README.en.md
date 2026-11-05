@@ -9,7 +9,7 @@ Snowfall is a custom integration that adds an animated snowfall effect directly 
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.11.1-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-2026.11.2-blue" alt="Version">
   <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS">
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
@@ -75,6 +75,9 @@ After adding the integration, open **Settings → Devices & services → Snowfal
 | Allowlist text entity | Pages where snowfall is permitted |
 
 When upgrading, values from the previous Options Flow are reused to initialize the new entities. Existing settings are not reset.
+
+
+All integration entities are grouped under a single **Snowfall** device. Open **Settings → Devices & services → Snowfall → Device** to access the switches and settings together.
 
 ### Operating modes
 
