@@ -21,6 +21,8 @@ from .const import (
     FLAKE_STYLE_SNOWFLAKES,
     FPS_30,
     FPS_60,
+    FPS_90,
+    FPS_120,
     MODE_ALWAYS,
     MODE_CUSTOM,
     MODE_WINTER,
@@ -100,7 +102,7 @@ class SnowfallFpsSelect(SnowfallSelectBase):
 
     _attr_translation_key = "fps"
     _attr_icon = "mdi:motion-play"
-    _attr_options = [FPS_30, FPS_60]
+    _attr_options = [FPS_30, FPS_60, FPS_90, FPS_120]
 
     def __init__(self, entry: ConfigEntry) -> None:
         super().__init__(entry, CONF_FPS)
