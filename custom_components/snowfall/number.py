@@ -27,7 +27,9 @@ class NumberSetting:
 
 
 SETTINGS = (
-    NumberSetting(CONF_FLAKE_COUNT, "flake_count", 10, 300, 10, "mdi:snowflake"),
+    NumberSetting(
+        CONF_FLAKE_COUNT, "flake_count", 10, 300, 10, "mdi:snowflake"
+    ),
     NumberSetting(CONF_SPEED, "speed", 25, 200, 5, "mdi:speedometer"),
     NumberSetting(CONF_SIZE, "size", 25, 200, 5, "mdi:arrow-expand"),
     NumberSetting(CONF_OPACITY, "opacity", 10, 100, 5, "mdi:opacity"),
@@ -63,7 +65,8 @@ class SnowfallNumber(SnowfallEntityMixin, NumberEntity):
     @property
     def native_value(self) -> float:
         """Return the current setting."""
-        return float(self._options.get(self._setting.key, DEFAULTS[self._setting.key]))
+        value = self._options.get(self._setting.key, DEFAULTS[self._setting.key])
+        return float(value)
 
     async def async_set_native_value(self, value: float) -> None:
         """Persist a new numeric setting."""
