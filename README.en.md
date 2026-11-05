@@ -64,10 +64,10 @@ The integration creates three logical Home Assistant devices:
 - **Snowfall Desktop** — visual settings for computers: flake count, speed, size and opacity, appearance, intensity preset, wind, and FPS.
 - **Snowfall Mobile** — an independent set of the same visual settings for phones and tablets.
 
-The **Device settings mode** selector provides two options:
+The **Separate device settings** switch controls the profile mode:
 
-- **Shared settings for all devices** — every browser uses the Snowfall Desktop profile. Snowfall Mobile controls are automatically hidden, while their saved values are preserved.
-- **Separate device settings** — computers use Snowfall Desktop, while phones and tablets use Snowfall Mobile. The client type is detected in the browser.
+- **Off** — every browser uses the Snowfall Desktop profile. Snowfall Mobile controls are automatically hidden, while their saved values are preserved.
+- **On** — computers use Snowfall Desktop, while phones and tablets use Snowfall Mobile. The client type is detected in the browser.
 
 During the update, existing visual settings are migrated to the Desktop profile. Existing entity IDs are preserved, so previously configured cards and automations should not need to be rebuilt. A separate Mobile profile is initialized with default values.
 
