@@ -50,16 +50,12 @@
       },
       "month_12": {
         "name": "December"
+      },
+      "device_profiles": {
+        "name": "Separate device settings"
       }
     },
     "select": {
-      "device_mode": {
-        "name": "Device settings mode",
-        "state": {
-          "shared": "Shared settings for all devices",
-          "separate": "Separate device settings"
-        }
-      },
       "mode": {
         "name": "Snowfall mode",
         "state": {
