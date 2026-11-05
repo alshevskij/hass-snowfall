@@ -83,11 +83,10 @@
   const getSwitchState = () => getHassStates()?.[ENTITY];
 
   const isMobileClient = () => {
-    if (typeof navigator.userAgentData?.mobile === "boolean") {
-      return navigator.userAgentData.mobile;
-    }
+    if (navigator.userAgentData?.mobile === true) return true;
     const ua = navigator.userAgent || "";
     return /Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua)
+      || navigator.userAgentData?.platform === "Android"
       || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   };
 
