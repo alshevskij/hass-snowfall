@@ -9,7 +9,7 @@ Snowfall — пользовательская интеграция, котора
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.11.1-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-2026.11.2-blue" alt="Version">
   <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS">
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
@@ -75,6 +75,9 @@ Snowfall — пользовательская интеграция, котора
 | Текстовая сущность белого списка | Страницы, на которых снегопад разрешён |
 
 При обновлении прежние значения из Options Flow используются как начальные значения новых сущностей — существующие настройки не сбрасываются.
+
+
+Все сущности интеграции объединены в одно устройство **Snowfall**. Откройте **Настройки → Устройства и службы → Snowfall → Устройство**, чтобы сразу увидеть переключатели и параметры в одном месте.
 
 ### Режимы работы
 
