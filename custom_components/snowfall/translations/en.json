@@ -35,13 +35,41 @@
           "custom": "Choose months"
         }
       },
-      "fps": {"name": "Frame rate"}
+      "fps": {"name": "Frame rate"},
+      "flake_style": {
+        "name": "Snowflake appearance",
+        "state": {
+          "dots": "Classic dots",
+          "snowflakes": "Six-armed snowflakes",
+          "crystals": "Crystals",
+          "mixed": "Mixed"
+        }
+      },
+      "preset": {
+        "name": "Snowfall intensity",
+        "state": {
+          "light": "Light snow",
+          "normal": "Normal snow",
+          "heavy": "Heavy snowfall",
+          "blizzard": "Blizzard"
+        }
+      },
+      "wind_direction": {
+        "name": "Wind direction",
+        "state": {
+          "left": "Left to right",
+          "right": "Right to left",
+          "variable": "Variable wind"
+        }
+      }
     },
     "number": {
       "flake_count": {"name": "Snowflake count"},
       "speed": {"name": "Fall speed"},
       "size": {"name": "Snowflake size"},
-      "opacity": {"name": "Opacity"}
+      "opacity": {"name": "Opacity"},
+      "wind_strength": {"name": "Wind strength"},
+      "wind_gusts": {"name": "Wind gusts"}
     },
     "text": {
       "excluded_paths": {"name": "Excluded pages"},
