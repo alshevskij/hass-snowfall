@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
@@ -15,6 +16,7 @@ from .const import (
     CONF_MONTHS,
     CONF_DEVICE_MODE,
     DEVICE_MODE_SEPARATE,
+    DEVICE_MODE_SHARED,
     DEFAULTS,
     MONTHS,
 )
@@ -74,13 +76,13 @@ class SnowfallSwitch(SnowfallEntityMixin, RestoreEntity, SwitchEntity):
         self.async_write_ha_state()
 
 
-
 class SnowfallDeviceProfilesSwitch(SnowfallEntityMixin, SwitchEntity):
     """Toggle shared or separate visual settings for devices."""
 
     _attr_has_entity_name = True
     _attr_translation_key = "device_profiles"
     _attr_icon = "mdi:devices"
+    _attr_entity_category = EntityCategory.CONFIG
 
     def __init__(self, entry: ConfigEntry) -> None:
         self._init_snowfall(entry, "device_profiles")
@@ -88,7 +90,7 @@ class SnowfallDeviceProfilesSwitch(SnowfallEntityMixin, SwitchEntity):
     @property
     def is_on(self) -> bool:
         """Return whether separate device profiles are enabled."""
-        return self._options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE]) == DEVICE_MODE_SEPARATE
+        return (\n            self._options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE])\n            == DEVICE_MODE_SEPARATE\n        )
 
     async def async_turn_on(self, **kwargs) -> None:
         """Enable separate desktop and mobile profiles."""
@@ -97,7 +99,7 @@ class SnowfallDeviceProfilesSwitch(SnowfallEntityMixin, SwitchEntity):
 
     async def async_turn_off(self, **kwargs) -> None:
         """Use the Desktop profile on every device."""
-        await update_options(self.hass, self._entry, {CONF_DEVICE_MODE: "shared"})
+        await update_options(self.hass, self._entry, {CONF_DEVICE_MODE: DEVICE_MODE_SHARED})
         update_mobile_entities_visibility(self.hass, self._entry)
 
 
