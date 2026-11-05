@@ -70,7 +70,7 @@ Starting with version 2026.11.3, standard entities for managing integration are 
 | Numerical speed setting | Falling speed: 25–200 |
 | Numerical size setting | Snowflake size: 25–200 |
 | Numerical transparency setting | Transparency: 10–100 |
-| Frame rate switch | 30, 60, 90 or 120 FPS |
+| Frame rate selection | 30, 60, 90 or 120 FPS |
 | Snowflake appearance | Dots, six-armed snowflakes, crystals or mixed |
 | Snowfall preset | Light, normal, heavy or blizzard |
 | Wind strength | 0–100 |
