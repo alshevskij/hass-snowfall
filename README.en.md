@@ -1,11 +1,11 @@
 # ❄️ Snowfall for Home Assistant
 
-Bring a winter atmosphere to your Home Assistant dashboard!
+Add a winter atmosphere to your Home Assistant control panel!✨
 
-Snowfall is a custom integration that adds an animated snowfall effect directly to the Home Assistant frontend. Control the effect and all its settings through native Home Assistant entities — no YAML and no separate Options Flow required.
+Snowfall is a custom integration that adds an animated falling snow effect directly to the Home Assistant interface. Control the snowfall and all its parameters via the standard Home Assistant entities — no YAML and no separate integration settings window.
 
 <p align="center">
-  <a href="README.md">🇷🇺 Русский</a> · <a href="README.en.md">🇬🇧 English</a>
+ <a href="README.md">🇷🇺 Russian</a> · <a href="README.en.md">🇬🇧 English</a>
 </p>
 
 <p align="center">
@@ -15,126 +15,109 @@ Snowfall is a custom integration that adds an animated snowfall effect directly 
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
 </p>
 
-<p align="center">
+## Current integration capabilities:
+
+- Animated snow directly in the Home Assistant interface (on absolutely any page).
+- A switch to turn snowfall on and off.
+- Three built‑in operating modes: **New Year’s** (snow falls only from December to February), **Year‑round** and **Month selection**.
+- 12 separate switches for each month of the year. They are active and used only in the **Month selection** mode.
+- Setting the number, speed, size and transparency of snowflakes.
+- Limiting the rendering frequency: 30 or 60 frames per second.
+- A **whitelist** of pages where snowfall is allowed.
+- **Blacklist** of pages where snowfall is prohibited.
+
+## Integration installation:
+
+### Via HACS / Marketplace (recommended)
+
+1. Make sure HACS is installed in Home Assistant.
+2. Click the button below <p>
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=alshevskij&repository=hass-snowfall&category=integration">
     <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Add Snowfall to Home Assistant via HACS">
   </a>
 </p>
 
----
-
-## Features
-
-- Animated snowfall directly in the Home Assistant frontend.
-- A dedicated switch to enable or disable the effect.
-- Three operating modes: **Winter season** (December–February), **All year**, and **Custom months**.
-- 12 individual month switches, shown only in **Custom months** mode.
-- Adjustable snowflake count, fall speed, size, and opacity.
-- Rendering frame-rate limit: 30 or 60 FPS.
-- An **allowlist** of pages where snowfall is permitted.
-- A **blocklist** of pages where snowfall is disabled.
-- All settings are exposed as native Home Assistant entities and can be used on dashboards, in scripts, and in automations.
-- All entities are grouped under a single **Snowfall** device.
-- Settings are available directly in the integration device. No YAML or legacy Options Flow is needed to adjust them.
-
-## Installation
-
-### Via HACS
-
-1. Make sure HACS is installed in Home Assistant.
-2. Click the **Add to Home Assistant** button above.
-3. Open the Snowfall repository in HACS and confirm adding the custom repository if prompted.
+3. Confirm the addition of the custom repository.
 4. Find Snowfall and install the integration.
 5. Restart Home Assistant.
 
-If the button does not work, add the repository manually:
+If the button didn’t work, add the repository manually using the link:
 
 `https://github.com/alshevskij/hass-snowfall`
 
-Select **Integration** as the category in HACS.
+In HACS, select the **Integration** category.
 
 ### Manual installation
 
-1. Download this repository.
-2. Copy `custom_components/snowfall` into your Home Assistant `custom_components` directory.
+1. Download the repository.
+2. Copy the `custom_components/snowfall` folder to the `custom_components` directory of your Home Assistant.
 3. Restart Home Assistant.
 
-## Configuration and entities
+## Configuration and integration entities:
 
-After adding the integration, open **Settings → Devices & services → Snowfall → Device**. The device contains the main snowfall switch and all integration settings.
-
-The main switch keeps its existing entity ID, `switch.snowfall`. The remaining entities are created automatically:
+The main snowfall switch, added in version 2026.10.1, retains the previous ID `switch.snowfall`.
+Starting with version 2026.11.2, steel entities for managing integration are created automatically.
 
 | Entity | Purpose |
 |---|---|
-| `switch.snowfall` | Enable or disable snowfall |
-| Mode selector | Winter season, All year, or Custom months |
-| 12 month switches | Select active months; visible only in Custom months mode |
-| Snowflake count control | Snowflake count: 10–300 |
-| Speed control | Fall speed: 25–200 |
-| Size control | Snowflake size: 25–200 |
-| Opacity control | Opacity: 10–100 |
-| Frame-rate selector | 30 or 60 FPS |
-| Blocklist text entity | Pages where snowfall is disabled |
-| Allowlist text entity | Pages where snowfall is permitted |
+| `switch.snowfall` | Turning snowfall on and off |
+| Mode switch | New Year’s, year‑round, or month selection |
+| 12 month switches | Selection of active months (active only in month selection mode) |
+| Numerical quantity setting | Number of snowflakes: 10–300 |
+| Numerical speed setting | Falling speed: 25–200 |
+| Numerical size setting | Snowflake size: 25–200 |
+| Numerical transparency setting | Transparency: 10–100 |
+| Frame rate switch | 30 or 60 FPS |
+| Blacklist text entity | Pages where snowfall is prohibited |
+| Whitelist text entity | Pages where snowfall is allowed |
 
-Entity names follow your Home Assistant language. All entities are grouped under one **Snowfall** device, whose model is **Home Assistant FX**.
+### What has changed:
 
-### What's new
+In version 2026.11.2, snowfall control has been moved to a full set of Home Assistant entities (the original control was implemented via integration settings, which turned out to be very inconvenient)
 
-This version replaces the old integration options screen with a complete set of native Home Assistant entities:
+- Separate entities have been added for the operating mode and frame rate.
+- Numerical settings for the number, speed, size, and transparency of snowflakes have been added.
+- Switches have been added for each of the 12 months. They are automatically hidden (become inactive) in the **New Year** and **Year‑round** modes, and become available in the **Month Selection** mode. The selected months are saved when changing the mode.
+- A whitelist of pages has been added in addition to the already existing blacklist.
+- A rendering frequency limit of 30/60 FPS has been added to control the autonomy of your devices in which it is snowing.
+- Previously saved parameters from Options Flow are transferred to new entities during an update, so your existing settings should not be reset.
 
-- Integration settings are now adjusted using switches, selectors, number controls, and text entities directly in the Snowfall device.
-- Added dedicated entities for the operating mode and frame rate.
-- Added number controls for snowflake count, speed, size, and opacity.
-- Added individual switches for all 12 months. They are automatically hidden in **Winter season** and **All year** modes and become available in **Custom months** mode. Selected months are preserved when changing modes.
-- Added a page allowlist alongside the existing blocklist.
-- Added a 30/60 FPS rendering limit.
-- Grouped all entities under one device and updated its model name to **Home Assistant FX**.
-- Previously saved Options Flow values are migrated to initialize the new entities, so existing settings should be preserved when upgrading.
+## White and black lists of pages:
 
-## Operating modes
-
-- **Winter season** — snowfall is allowed from December through February.
-- **All year** — snowfall is allowed throughout the year.
-- **Custom months** — snowfall is allowed only in months whose switches are enabled.
-
-Month switches are automatically hidden in **Winter season** and **All year** modes, and shown when **Custom months** is selected. Saved month settings are preserved when switching modes.
-
-## Page allowlist and blocklist
-
-Enter page paths in the text entities, separated by semicolons or commas. For example:
+In text entities, specify page paths separated by a semicolon or a comma. For example:
 
 `/lovelace/home; /lovelace/lights; /config/dashboard`
 
-Commas are also supported:
+You can also use commas:
 
 `/lovelace/home, /lovelace/lights`
 
-Use paths beginning with `/`; do not include the domain, query parameters, or URL fragment.
+Specify a path starting with `/`, without a domain, query parameters, or URL fragment.
 
-- **Empty allowlist** — snowfall is allowed on every page except those in the blocklist.
-- **Non-empty allowlist** — snowfall is allowed only on matching pages.
-- The **blocklist** always excludes matching pages from the effect.
-- If a path matches both lists, the blocklist takes priority and snowfall is hidden on that page.
-- Matching includes nested pages: the rule `/lovelace` also matches `/lovelace/room`.
+- **The whitelist is empty** — snowfall is allowed on all pages except those listed in the blacklist.
+- **The whitelist is full** — snowfall is allowed only on matching pages.
+- **The blacklist** excludes the specified pages from the effect.
+- If the path matches both lists, the blacklist always takes priority: snowfall is not displayed on this page.
+- The matching takes into account nested pages: the rule `/lovelace` also applies to `/lovelace/room`.
 
-Each Home Assistant text entity is limited to 255 characters. Use concise paths for longer lists.
+Each Home Assistant text entity is limited to 255 characters. If the list is large, use shorter paths.
 
-## Automations
+## Control via automations:
 
-All entities can be added to dashboards and used in scripts and automations. For example, schedule `switch.snowfall`, change the operating mode by season, or adjust animation settings automatically.
+All integration entities, of course, can be added to your panels and used to create convenient cards for managing parameters, for example:
 
-To manage the schedule entirely through Home Assistant, select **All year** mode and let automations turn the effect on and off.
+<img width="495" height="632" alt="3" src="https://github.com/user-attachments/assets/3dd15153-081a-4f83-a2a4-ae4844330372" />
+
+You can also use it in automations; for example, you can enable `switch.snowfall` on a schedule, change the mode depending on the season, or switch animation parameters. If you want to fully manage the snowfall schedule using Home Assistant, select the **Year‑Round** mode, and let the automations handle turning the effect on and off.
 
 Documentation: [Home Assistant Automations](https://www.home-assistant.io/docs/automation/).
 
 ## Support
 
-Found a bug or have a feature request?
+Found an error or want to suggest a new feature?
 
-[Open a GitHub Issue](https://github.com/alshevskij/hass-snowfall/issues).
+[Create an Issue on GitHub](https://github.com/alshevskij/hass-snowfall/issues).
 
 ## License
 
-See the [LICENSE](LICENSE) file.
+The project is distributed under the license specified in the [LICENSE](LICENSE) file.
