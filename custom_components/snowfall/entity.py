@@ -7,6 +7,7 @@ from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.dispatcher import (
     async_dispatcher_connect,
     async_dispatcher_send,
@@ -32,7 +33,7 @@ async def update_options(
 
 
 class SnowfallEntityMixin:
-    """Mixin with shared config-entry settings support."""
+    """Mixin with shared config-entry and device support."""
 
     _entry: ConfigEntry
 
@@ -40,6 +41,17 @@ class SnowfallEntityMixin:
         """Initialize common entity properties."""
         self._entry = entry
         self._attr_unique_id = f"{entry.entry_id}_{unique_id_suffix}"
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Group every Snowfall entity under one Home Assistant device."""
+        return DeviceInfo(
+            identifiers={(DOMAIN, self._entry.entry_id)},
+            name="Snowfall",
+            manufacturer="ALSHEVSKIJ",
+            model="Home Assistant frontend snowfall effect",
+            sw_version="2026.11.2",
+        )
 
     @property
     def _options(self) -> dict[str, Any]:
