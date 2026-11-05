@@ -10,11 +10,19 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
-from .const import DOMAIN, FRONTEND_URL, JS_URL
+from .const import (
+    DEFAULTS,
+    DOMAIN,
+    FRONTEND_URL,
+    JS_URL,
+    PROFILE_SETTING_KEYS,
+)
+from .const import DEVICE_MODE_SHARED, CONF_DEVICE_MODE
 
 PLATFORMS = [
     Platform.NUMBER,
     Platform.SELECT,
+    Platform.SENSOR,
     Platform.SWITCH,
     Platform.TEXT,
 ]
@@ -27,8 +35,34 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     return True
 
 
+def _migrate_profile_options(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Move legacy visual options into the desktop profile and initialize mobile."""
+    options = dict(entry.options)
+    changed = False
+
+    if CONF_DEVICE_MODE not in options:
+        options[CONF_DEVICE_MODE] = DEVICE_MODE_SHARED
+        changed = True
+
+    for key in PROFILE_SETTING_KEYS:
+        desktop_key = f"desktop_{key}"
+        mobile_key = f"mobile_{key}"
+
+        if desktop_key not in options:
+            options[desktop_key] = options.get(key, DEFAULTS[key])
+            changed = True
+        if mobile_key not in options:
+            options[mobile_key] = DEFAULTS[key]
+            changed = True
+
+    if changed:
+        hass.config_entries.async_update_entry(entry, options=options)
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Snowfall from a config entry."""
+    _migrate_profile_options(hass, entry)
+
     if not hass.data.setdefault(DOMAIN, {}).get("static_registered"):
         await hass.http.async_register_static_paths(
             [
