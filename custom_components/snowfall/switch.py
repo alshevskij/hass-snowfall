@@ -14,11 +14,13 @@ from .const import (
     CONF_MODE,
     CONF_MONTHS,
     CONF_DEVICE_MODE,
+    DEVICE_MODE_SEPARATE,
     DEFAULTS,
     MONTHS,
 )
 from .entity import (
     SnowfallEntityMixin,
+    update_mobile_entities_visibility,
     update_month_entities_visibility,
     update_options,
 )
@@ -30,7 +32,7 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the global Snowfall switches."""
-    entities = [SnowfallSwitch(entry)]
+    entities = [SnowfallSwitch(entry), SnowfallDeviceProfilesSwitch(entry)]
     entities.extend(SnowfallMonthSwitch(entry, month) for month in MONTHS)
     async_add_entities(entities)
 
@@ -70,6 +72,33 @@ class SnowfallSwitch(SnowfallEntityMixin, RestoreEntity, SwitchEntity):
     async def async_turn_off(self, **kwargs) -> None:
         self._attr_is_on = False
         self.async_write_ha_state()
+
+
+
+class SnowfallDeviceProfilesSwitch(SnowfallEntityMixin, SwitchEntity):
+    """Toggle shared or separate visual settings for devices."""
+
+    _attr_has_entity_name = True
+    _attr_translation_key = "device_profiles"
+    _attr_icon = "mdi:devices"
+
+    def __init__(self, entry: ConfigEntry) -> None:
+        self._init_snowfall(entry, "device_profiles")
+
+    @property
+    def is_on(self) -> bool:
+        """Return whether separate device profiles are enabled."""
+        return self._options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE]) == DEVICE_MODE_SEPARATE
+
+    async def async_turn_on(self, **kwargs) -> None:
+        """Enable separate desktop and mobile profiles."""
+        await update_options(self.hass, self._entry, {CONF_DEVICE_MODE: DEVICE_MODE_SEPARATE})
+        update_mobile_entities_visibility(self.hass, self._entry)
+
+    async def async_turn_off(self, **kwargs) -> None:
+        """Use the Desktop profile on every device."""
+        await update_options(self.hass, self._entry, {CONF_DEVICE_MODE: "shared"})
+        update_mobile_entities_visibility(self.hass, self._entry)
 
 
 class SnowfallMonthSwitch(SnowfallEntityMixin, SwitchEntity):
