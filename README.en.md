@@ -22,7 +22,10 @@ Snowfall is a custom integration that adds an animated falling snow effect direc
 - Three built‑in operating modes: **New Year’s** (snow falls only from December to February), **Year‑round** and **Month selection**.
 - 12 separate switches for each month of the year. They are active and used only in the **Month selection** mode.
 - Setting the number, speed, size, transparency and appearance of snowflakes.
-- Four snowfall presets: light, normal, heavy and blizzard. Presets adjust overall intensity without overwriting manual slider values.\n- Four snowflake styles: dots, six-armed snowflakes, crystals and mixed.\n- Customizable wind: strength, direction and gusts; wind affects each snowflake's horizontal trajectory.\n- Limiting the rendering frequency: 30 or 60 frames per second.
+- Four snowfall presets: light, normal, heavy and blizzard. Presets adjust overall intensity without overwriting manual slider values.
+- Four snowflake styles: dots, six-armed snowflakes, crystals and mixed.
+- Customizable wind: strength, direction and gusts; wind affects each snowflake's horizontal trajectory.
+- Limiting the rendering frequency: 30 or 60 frames per second.
 - A **whitelist** of pages where snowfall is allowed.
 - **Blacklist** of pages where snowfall is prohibited.
 
@@ -67,7 +70,12 @@ Starting with version 2026.12.1, standard entities for managing integration are 
 | Numerical speed setting | Falling speed: 25–200 |
 | Numerical size setting | Snowflake size: 25–200 |
 | Numerical transparency setting | Transparency: 10–100 |
-| Frame rate switch | 30 or 60 FPS |\n| Snowflake appearance | Dots, six-armed snowflakes, crystals or mixed |\n| Snowfall preset | Light, normal, heavy or blizzard |\n| Wind strength | 0–100 |\n| Wind direction | Left, right or variable |\n| Wind gusts | 0–100 |
+| Frame rate switch | 30 or 60 FPS |
+| Snowflake appearance | Dots, six-armed snowflakes, crystals or mixed |
+| Snowfall preset | Light, normal, heavy or blizzard |
+| Wind strength | 0–100 |
+| Wind direction | Left, right or variable |
+| Wind gusts | 0–100 |
 | Blacklist text entity | Pages where snowfall is prohibited |
 | Whitelist text entity | Pages where snowfall is allowed |
 
@@ -78,7 +86,10 @@ In version 2026.12.1, snowfall control has been moved to a full set of Home Assi
 - Separate entities have been added for the operating mode and frame rate.
 - Numerical settings for the number, speed, size, and transparency of snowflakes have been added.
 - Switches have been added for each of the 12 months. They are automatically hidden (become inactive) in the **New Year** and **Year‑round** modes, and become available in the **Month Selection** mode. The selected months are saved when changing the mode.
-- A whitelist of pages has been added in addition to the already existing blacklist.\n- Added snowflake appearance styles: dots, six-armed snowflakes, crystals and mixed.\n- Added snowfall intensity presets. They scale particle density and animation speed without overwriting manual slider values.\n- Added wind physics: direction, strength and gusts affect the horizontal movement of each snowflake.
+- A whitelist of pages has been added in addition to the already existing blacklist.
+- Added snowflake appearance styles: dots, six-armed snowflakes, crystals and mixed.
+- Added snowfall intensity presets. They scale particle density and animation speed without overwriting manual slider values.
+- Added wind physics: direction, strength and gusts affect the horizontal movement of each snowflake.
 - A rendering frequency limit of 30/60 FPS has been added to control the autonomy of your devices in which it is snowing.
 - Previously saved parameters from Options Flow are transferred to new entities during an update, so your existing settings should not be reset.
 
