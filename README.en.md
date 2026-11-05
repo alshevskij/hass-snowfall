@@ -9,7 +9,7 @@ Snowfall is a custom integration that adds an animated snowfall effect directly 
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.11.2-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-2026.11.3-blue" alt="Version">
   <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS">
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
@@ -28,7 +28,7 @@ Snowfall is a custom integration that adds an animated snowfall effect directly 
 - Animated snowfall directly in the Home Assistant frontend.
 - A dedicated switch to enable or disable the effect.
 - Three modes: Winter season (December–February), All year, and Custom months.
-- Individual switches for all 12 months.
+- The 12 month switches are shown only in Custom months mode.
 - Adjustable snowflake count, speed, size, and opacity.
 - Rendering frame-rate limit: 30 or 60 FPS.
 - Allowlist of dashboard pages where snowfall is permitted.
@@ -65,7 +65,7 @@ After adding the integration, open **Settings → Devices & services → Snowfal
 |---|---|
 | `switch.snowfall` | Enable or disable snowfall |
 | Mode selector | Winter, All year, or Custom months |
-| 12 month switches | Select active months |
+| 12 month switches | Select active months; shown only in Custom months mode |
 | Snowflake count control | Snowflake count: 10–300 |
 | Speed control | Speed: 25–200 |
 | Size control | Size: 25–200 |
@@ -85,7 +85,7 @@ All integration entities are grouped under a single **Snowfall** device. Open **
 - **All year** — snowfall is allowed throughout the year.
 - **Custom months** — snowfall is active only in months whose switches are enabled.
 
-Month switches affect scheduling only in **Custom months** mode.
+Month switches are automatically hidden in **Winter season** and **All year** modes, and shown when **Custom months** is selected. Saved month settings are preserved when switching modes.
 
 ### Page allowlist and blocklist
 
