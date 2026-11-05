@@ -90,7 +90,10 @@ class SnowfallDeviceProfilesSwitch(SnowfallEntityMixin, SwitchEntity):
     @property
     def is_on(self) -> bool:
         """Return whether separate device profiles are enabled."""
-        return (\n            self._options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE])\n            == DEVICE_MODE_SEPARATE\n        )
+        return (
+            self._options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE])
+            == DEVICE_MODE_SEPARATE
+        )
 
     async def async_turn_on(self, **kwargs) -> None:
         """Enable separate desktop and mobile profiles."""
