@@ -6,6 +6,8 @@
   window.__haSnowfallLoaded = true;
 
   const ENTITY = "switch.snowfall";
+  const DESKTOP_PROFILE_ENTITY = "sensor.snowfall_desktop_profile";
+  const MOBILE_PROFILE_ENTITY = "sensor.snowfall_mobile_profile";
   const SETTINGS_UPDATE_INTERVAL = 500;
   const canvas = document.createElement("canvas");
   canvas.id = "ha-snowfall-canvas";
@@ -77,27 +79,47 @@
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     lastCount = -1;
   };
-  const getSwitchState = () => document.querySelector("home-assistant")?.hass?.states?.[ENTITY];
+  const getHassStates = () => document.querySelector("home-assistant")?.hass?.states;
+  const getSwitchState = () => getHassStates()?.[ENTITY];
+
+  const isMobileClient = () => {
+    if (typeof navigator.userAgentData?.mobile === "boolean") {
+      return navigator.userAgentData.mobile;
+    }
+    const ua = navigator.userAgent || "";
+    return /Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua)
+      || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  };
+
+  const getProfileState = (globalEntity) => {
+    const useMobile = globalEntity?.attributes?.device_mode === "separate" && isMobileClient();
+    const states = getHassStates();
+    return states?.[useMobile ? MOBILE_PROFILE_ENTITY : DESKTOP_PROFILE_ENTITY];
+  };
 
   const updateSettings = () => {
-    const entity = getSwitchState();
-    if (!entity?.attributes) return;
-    const a = entity.attributes;
+    const globalEntity = getSwitchState();
+    if (!globalEntity?.attributes) return;
+    const profileEntity = getProfileState(globalEntity);
+    if (!profileEntity?.attributes) return;
+
+    const global = globalEntity.attributes;
+    const profile = profileEntity.attributes;
     settings = {
-      mode: a.mode ?? defaults.mode,
-      months: Array.isArray(a.months) ? a.months.map(Number).filter((m) => Number.isInteger(m) && m >= 1 && m <= 12) : defaults.months,
-      excluded_paths: normalizePaths(a.excluded_paths),
-      included_paths: normalizePaths(a.included_paths),
-      flake_count: clamp(a.flake_count, 10, 300, defaults.flake_count),
-      speed: clamp(a.speed, 25, 200, defaults.speed),
-      size: clamp(a.size, 25, 200, defaults.size),
-      opacity: clamp(a.opacity, 10, 100, defaults.opacity),
-      fps: clamp(a.fps, 30, 120, defaults.fps),
-      flake_style: a.flake_style ?? defaults.flake_style,
-      preset: a.preset ?? defaults.preset,
-      wind_strength: clamp(a.wind_strength, 0, 100, defaults.wind_strength),
-      wind_direction: a.wind_direction ?? defaults.wind_direction,
-      wind_gusts: clamp(a.wind_gusts, 0, 100, defaults.wind_gusts),
+      mode: global.mode ?? defaults.mode,
+      months: Array.isArray(global.months) ? global.months.map(Number).filter((m) => Number.isInteger(m) && m >= 1 && m <= 12) : defaults.months,
+      excluded_paths: normalizePaths(global.excluded_paths),
+      included_paths: normalizePaths(global.included_paths),
+      flake_count: clamp(profile.flake_count, 10, 300, defaults.flake_count),
+      speed: clamp(profile.speed, 25, 200, defaults.speed),
+      size: clamp(profile.size, 25, 200, defaults.size),
+      opacity: clamp(profile.opacity, 10, 100, defaults.opacity),
+      fps: clamp(profile.fps, 30, 120, defaults.fps),
+      flake_style: profile.flake_style ?? defaults.flake_style,
+      preset: profile.preset ?? defaults.preset,
+      wind_strength: clamp(profile.wind_strength, 0, 100, defaults.wind_strength),
+      wind_direction: profile.wind_direction ?? defaults.wind_direction,
+      wind_gusts: clamp(profile.wind_gusts, 0, 100, defaults.wind_gusts),
     };
   };
 
