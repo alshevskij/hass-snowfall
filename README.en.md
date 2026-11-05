@@ -9,7 +9,7 @@ Snowfall is a custom integration that adds an animated falling snow effect direc
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.11.4-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-2026.11.3-blue" alt="Version">
   <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS">
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
@@ -25,7 +25,7 @@ Snowfall is a custom integration that adds an animated falling snow effect direc
 - Four snowfall presets: light, normal, heavy and blizzard. Presets adjust overall intensity without overwriting manual slider values.
 - Four snowflake styles: dots, six-armed snowflakes, crystals and mixed.
 - Customizable wind: strength, direction and gusts; wind affects each snowflake's horizontal trajectory.
-- Limiting the rendering frequency: 30 or 60 frames per second.
+- Limiting the rendering frequency: 30, 60, 90 or 120 frames per second.
 - A **whitelist** of pages where snowfall is allowed.
 - **Blacklist** of pages where snowfall is prohibited.
 
@@ -59,7 +59,7 @@ In HACS, select the **Integration** category.
 ## Configuration and integration entities:
 
 The main snowfall switch, added in version 2026.10.1, retains the previous ID `switch.snowfall`.
-Starting with version 2026.11.4, standard entities for managing integration are created automatically.
+Starting with version 2026.11.3, standard entities for managing integration are created automatically.
 
 | Entity | Purpose |
 |---|---|
@@ -70,7 +70,7 @@ Starting with version 2026.11.4, standard entities for managing integration are 
 | Numerical speed setting | Falling speed: 25–200 |
 | Numerical size setting | Snowflake size: 25–200 |
 | Numerical transparency setting | Transparency: 10–100 |
-| Frame rate switch | 30 or 60 FPS |
+| Frame rate switch | 30, 60, 90 or 120 FPS |
 | Snowflake appearance | Dots, six-armed snowflakes, crystals or mixed |
 | Snowfall preset | Light, normal, heavy or blizzard |
 | Wind strength | 0–100 |
@@ -81,7 +81,7 @@ Starting with version 2026.11.4, standard entities for managing integration are 
 
 ### What has changed:
 
-In version 2026.11.4, snowfall control has been moved to a full set of Home Assistant entities (the original control was implemented via integration settings, which turned out to be very inconvenient)
+In version 2026.11.3, snowfall control has been moved to a full set of Home Assistant entities (the original control was implemented via integration settings, which turned out to be very inconvenient)
 
 - Separate entities have been added for the operating mode and frame rate.
 - Numerical settings for the number, speed, size, and transparency of snowflakes have been added.
