@@ -63,7 +63,7 @@
         }
       }
     },
-    "number": {
+    "sensor": {\n      "profile": { "name": "Profile settings" }\n    },\n    "number": {
       "flake_count": {"name": "Snowflake count"},
       "speed": {"name": "Fall speed"},
       "size": {"name": "Snowflake size"},
