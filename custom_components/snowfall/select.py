@@ -8,7 +8,16 @@ from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import CONF_FPS, CONF_MODE, DEFAULTS, FPS_30, FPS_60, MODE_ALWAYS, MODE_CUSTOM, MODE_WINTER
+from .const import (
+    CONF_FPS,
+    CONF_MODE,
+    DEFAULTS,
+    FPS_30,
+    FPS_60,
+    MODE_ALWAYS,
+    MODE_CUSTOM,
+    MODE_WINTER,
+)
 from .entity import SnowfallEntityMixin, update_options
 
 
