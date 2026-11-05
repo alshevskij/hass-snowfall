@@ -79,17 +79,26 @@ def update_mobile_entities_visibility(
         entry.options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE])
         == DEVICE_MODE_SEPARATE
     )
-    suffixes = [f"mobile_{key}" for key in PROFILE_SETTING_KEYS]
-    suffixes.extend(("mobile_profile",))
     domains = {
-        "number": PROFILE_SETTING_KEYS[:4] + PROFILE_SETTING_KEYS[7:8] + PROFILE_SETTING_KEYS[9:10],
-        "select": (PROFILE_SETTING_KEYS[4], PROFILE_SETTING_KEYS[5], PROFILE_SETTING_KEYS[6], PROFILE_SETTING_KEYS[8]),
+        "number": (
+            PROFILE_SETTING_KEYS[0],
+            PROFILE_SETTING_KEYS[1],
+            PROFILE_SETTING_KEYS[2],
+            PROFILE_SETTING_KEYS[3],
+            PROFILE_SETTING_KEYS[7],
+            PROFILE_SETTING_KEYS[9],
+        ),
+        "select": (
+            PROFILE_SETTING_KEYS[4],
+            PROFILE_SETTING_KEYS[5],
+            PROFILE_SETTING_KEYS[6],
+            PROFILE_SETTING_KEYS[8],
+        ),
         "sensor": ("profile",),
     }
     for domain, keys in domains.items():
         for key in keys:
-            suffix = f"mobile_{key}"
-            unique_id = f"{entry.entry_id}_{suffix}"
+            unique_id = f"{entry.entry_id}_mobile_{key}"
             entity_id = registry.async_get_entity_id(domain, DOMAIN, unique_id)
             if entity_id is None:
                 continue
@@ -99,16 +108,6 @@ def update_mobile_entities_visibility(
             hidden_by = None if visible else RegistryEntryHider.INTEGRATION
             if registry_entry.hidden_by != hidden_by:
                 registry.async_update_entity(entity_id, hidden_by=hidden_by)
-
-    sensor_id = registry.async_get_entity_id(
-        "sensor", DOMAIN, f"{entry.entry_id}_mobile_profile"
-    )
-    if sensor_id:
-        registry_entry = registry.async_get(sensor_id)
-        if registry_entry and registry_entry.hidden_by != RegistryEntryHider.USER:
-            hidden_by = None if visible else RegistryEntryHider.INTEGRATION
-            if registry_entry.hidden_by != hidden_by:
-                registry.async_update_entity(sensor_id, hidden_by=hidden_by)
 
 
 class SnowfallEntityMixin:
