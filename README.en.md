@@ -59,20 +59,22 @@ Select **Integration** as the category in HACS.
 
 ## Configuration and entities
 
-After adding the integration, open **Settings → Devices & services → Snowfall**. The integration creates these entities:
+After adding the integration, open **Settings → Devices & services → Snowfall**. The main switch keeps its existing ID, `switch.snowfall`; the remaining entities are named according to the Home Assistant language:
 
 | Entity | Purpose |
 |---|---|
 | `switch.snowfall` | Enable or disable snowfall |
-| `select.snowfall_mode` | Winter, All year, or Custom months |
-| `switch.snowfall_january` … `switch.snowfall_december` | Select active months |
-| `number.snowfall_flake_count` | Snowflake count: 10–300 |
-| `number.snowfall_speed` | Speed: 25–200 |
-| `number.snowfall_size` | Size: 25–200 |
-| `number.snowfall_opacity` | Opacity: 10–100 |
-| `select.snowfall_fps` | Rendering rate: 30 or 60 FPS |
-| `text.snowfall_excluded_paths` | Blocklist of pages |
-| `text.snowfall_included_paths` | Allowlist of pages |
+| Mode selector | Winter, All year, or Custom months |
+| 12 month switches | Select active months |
+| Snowflake count control | Snowflake count: 10–300 |
+| Speed control | Speed: 25–200 |
+| Size control | Size: 25–200 |
+| Opacity control | Opacity: 10–100 |
+| FPS selector | Rendering rate: 30 or 60 FPS |
+| Blocklist text entity | Pages where snowfall is disabled |
+| Allowlist text entity | Pages where snowfall is permitted |
+
+When upgrading, values from the previous Options Flow are reused to initialize the new entities. Existing settings are not reset.
 
 ### Operating modes
 
