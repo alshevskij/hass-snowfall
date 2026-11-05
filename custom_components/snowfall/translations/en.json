@@ -12,19 +12,45 @@
   },
   "entity": {
     "switch": {
-      "snowfall": {"name": "Snowfall"},
-      "month_1": {"name": "January"},
-      "month_2": {"name": "February"},
-      "month_3": {"name": "March"},
-      "month_4": {"name": "April"},
-      "month_5": {"name": "May"},
-      "month_6": {"name": "June"},
-      "month_7": {"name": "July"},
-      "month_8": {"name": "August"},
-      "month_9": {"name": "September"},
-      "month_10": {"name": "October"},
-      "month_11": {"name": "November"},
-      "month_12": {"name": "December"}
+      "snowfall": {
+        "name": "Snowfall"
+      },
+      "month_1": {
+        "name": "January"
+      },
+      "month_2": {
+        "name": "February"
+      },
+      "month_3": {
+        "name": "March"
+      },
+      "month_4": {
+        "name": "April"
+      },
+      "month_5": {
+        "name": "May"
+      },
+      "month_6": {
+        "name": "June"
+      },
+      "month_7": {
+        "name": "July"
+      },
+      "month_8": {
+        "name": "August"
+      },
+      "month_9": {
+        "name": "September"
+      },
+      "month_10": {
+        "name": "October"
+      },
+      "month_11": {
+        "name": "November"
+      },
+      "month_12": {
+        "name": "December"
+      }
     },
     "select": {
       "device_mode": {
@@ -42,7 +68,9 @@
           "custom": "Choose months"
         }
       },
-      "fps": {"name": "Frame rate"},
+      "fps": {
+        "name": "Frame rate"
+      },
       "flake_style": {
         "name": "Snowflake appearance",
         "state": {
@@ -71,19 +99,40 @@
       }
     },
     "sensor": {
-      "profile": { "name": "Profile settings" }
+      "desktop_profile": {
+        "name": "Snowfall Desktop Profile"
+      },
+      "mobile_profile": {
+        "name": "Snowfall Mobile Profile"
+      }
     },
     "number": {
-      "flake_count": {"name": "Snowflake count"},
-      "speed": {"name": "Fall speed"},
-      "size": {"name": "Snowflake size"},
-      "opacity": {"name": "Opacity"},
-      "wind_strength": {"name": "Wind strength"},
-      "wind_gusts": {"name": "Wind gusts"}
+      "flake_count": {
+        "name": "Snowflake count"
+      },
+      "speed": {
+        "name": "Fall speed"
+      },
+      "size": {
+        "name": "Snowflake size"
+      },
+      "opacity": {
+        "name": "Opacity"
+      },
+      "wind_strength": {
+        "name": "Wind strength"
+      },
+      "wind_gusts": {
+        "name": "Wind gusts"
+      }
     },
     "text": {
-      "excluded_paths": {"name": "Excluded pages"},
-      "included_paths": {"name": "Included pages"}
+      "excluded_paths": {
+        "name": "Excluded pages"
+      },
+      "included_paths": {
+        "name": "Included pages"
+      }
     }
   }
 }
