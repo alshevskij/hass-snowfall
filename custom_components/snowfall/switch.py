@@ -21,7 +21,11 @@ from .const import (
     DEFAULTS,
     MONTHS,
 )
-from .entity import SnowfallEntityMixin, update_options
+from .entity import (
+    SnowfallEntityMixin,
+    update_month_entities_visibility,
+    update_options,
+)
 
 
 async def async_setup_entry(
@@ -85,12 +89,18 @@ class SnowfallMonthSwitch(SnowfallEntityMixin, SwitchEntity):
 
     _attr_has_entity_name = True
     _attr_icon = "mdi:calendar-month"
+    _attr_entity_registry_visible_default = False
 
     def __init__(self, entry: ConfigEntry, month: int) -> None:
         """Initialize a month switch."""
         self._month = month
         self._attr_translation_key = f"month_{month}"
         self._init_snowfall(entry, f"month_{month}")
+
+    async def async_added_to_hass(self) -> None:
+        """Apply visibility based on the selected schedule mode."""
+        await super().async_added_to_hass()
+        update_month_entities_visibility(self.hass, self._entry)
 
     @property
     def is_on(self) -> bool:
