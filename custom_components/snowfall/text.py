@@ -33,7 +33,7 @@ def parse_paths(value: str) -> list[str]:
     return list(
         dict.fromkeys(
             path.strip()
-            for path in re.split(r"[,;\\n]+", value)
+            for path in re.split(r"[,;\n]+", value)
             if path.strip()
         )
     )
