@@ -9,7 +9,6 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import (
-    CONF_DEVICE_MODE,
     CONF_FLAKE_STYLE,
     CONF_FPS,
     CONF_MODE,
@@ -18,8 +17,6 @@ from .const import (
     DEFAULTS,
     DEVICE_DESKTOP,
     DEVICE_MOBILE,
-    DEVICE_MODE_SEPARATE,
-    DEVICE_MODE_SHARED,
     FLAKE_STYLE_CRYSTALS,
     FLAKE_STYLE_DOTS,
     FLAKE_STYLE_MIXED,
@@ -41,7 +38,6 @@ from .const import (
 )
 from .entity import (
     SnowfallEntityMixin,
-    update_mobile_entities_visibility,
     update_month_entities_visibility,
     update_options,
 )
@@ -56,7 +52,6 @@ async def async_setup_entry(
     async_add_entities(
         [
             SnowfallModeSelect(entry),
-            SnowfallDeviceModeSelect(entry),
             ProfileSelect(entry, CONF_FPS, "fps", [FPS_30, FPS_60, FPS_90, FPS_120], DEVICE_DESKTOP),
             ProfileSelect(entry, CONF_FLAKE_STYLE, "flake_style", [FLAKE_STYLE_DOTS, FLAKE_STYLE_SNOWFLAKES, FLAKE_STYLE_CRYSTALS, FLAKE_STYLE_MIXED], DEVICE_DESKTOP),
             ProfileSelect(entry, CONF_PRESET, "preset", [PRESET_LIGHT, PRESET_NORMAL, PRESET_HEAVY, PRESET_BLIZZARD], DEVICE_DESKTOP),
@@ -101,20 +96,6 @@ class SnowfallModeSelect(SnowfallSelectBase):
     async def async_select_option(self, option: str) -> None:
         await super().async_select_option(option)
         update_month_entities_visibility(self.hass, self._entry)
-
-
-class SnowfallDeviceModeSelect(SnowfallSelectBase):
-    """Select whether visual settings are shared or device-specific."""
-
-    _attr_icon = "mdi:devices"
-
-    def __init__(self, entry: ConfigEntry) -> None:
-        self._attr_options = [DEVICE_MODE_SHARED, DEVICE_MODE_SEPARATE]
-        super().__init__(entry, CONF_DEVICE_MODE, "device_mode")
-
-    async def async_select_option(self, option: str) -> None:
-        await super().async_select_option(option)
-        update_mobile_entities_visibility(self.hass, self._entry)
 
 
 class ProfileSelect(SnowfallEntityMixin, SelectEntity):
