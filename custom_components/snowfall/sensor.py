@@ -36,13 +36,13 @@ async def async_setup_entry(
 class SnowfallProfileSensor(SnowfallEntityMixin, SensorEntity):
     """Expose one visual profile as attributes for the frontend renderer."""
 
-    _attr_has_entity_name = True
+    _attr_has_entity_name = False
     _attr_entity_category = EntityCategory.DIAGNOSTIC
     _attr_entity_registry_visible_default = False
 
     def __init__(self, entry: ConfigEntry, device_role: str) -> None:
         self._device_role = device_role
-        self._attr_translation_key = "profile"
+        self._attr_translation_key = f"{device_role}_profile"
         self._init_snowfall(entry, f"{device_role}_profile", device_role)
 
     @property
