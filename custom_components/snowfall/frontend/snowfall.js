@@ -220,7 +220,7 @@
       const speedMultiplier = (settings.speed / 100) * profile.speed;
       const sizeMultiplier = settings.size / 100;
       const windPower = (settings.wind_strength / 100) * 2.8 * profile.wind;
-      const gustPower = (settings.wind_gusts / 100) * 1.8 * profile.wind;
+      const gustPower = windPower * (settings.wind_gusts / 100) * 1.8;
 
       for (const flake of flakes) {
         const radius = flake.baseRadius * sizeMultiplier;
