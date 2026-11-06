@@ -15,7 +15,20 @@ from homeassistant.helpers.dispatcher import (
 )
 from homeassistant.helpers.entity_registry import RegistryEntryHider
 
-from .const import DEFAULTS, DOMAIN, MODE_CUSTOM, MONTHS
+from .const import (
+    DEFAULTS,
+    DEVICE_DESKTOP,
+    DEVICE_MAIN,
+    DEVICE_MOBILE,
+    DEVICE_MODE_SEPARATE,
+    DOMAIN,
+    MONTHS,
+    PROFILE_NUMBER_KEYS,
+    PROFILE_SELECT_KEYS,
+    CONF_DEVICE_MODE,
+    MODE_CUSTOM,
+    CONF_MODE,
+)
 
 SIGNAL_SETTINGS_UPDATED = f"{DOMAIN}_settings_updated"
 
@@ -41,43 +54,83 @@ def update_month_entities_visibility(
 ) -> None:
     """Show month switches only while custom scheduling is selected."""
     registry = er.async_get(hass)
-    visible = entry.options.get("mode", DEFAULTS["mode"]) == MODE_CUSTOM
+    visible = entry.options.get(CONF_MODE, DEFAULTS[CONF_MODE]) == MODE_CUSTOM
 
     for month in MONTHS:
         unique_id = f"{entry.entry_id}_month_{month}"
         entity_id = registry.async_get_entity_id("switch", DOMAIN, unique_id)
         if entity_id is None:
             continue
-
         registry_entry = registry.async_get(entity_id)
-        if registry_entry is None:
+        if registry_entry is None or registry_entry.hidden_by == RegistryEntryHider.USER:
             continue
-
-        # Respect an explicit visibility choice made by the user.
-        if registry_entry.hidden_by == RegistryEntryHider.USER:
-            continue
-
         hidden_by = None if visible else RegistryEntryHider.INTEGRATION
         if registry_entry.hidden_by != hidden_by:
             registry.async_update_entity(entity_id, hidden_by=hidden_by)
+
+
+@callback
+def update_mobile_entities_visibility(
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+) -> None:
+    """Hide the mobile profile entities while shared settings are selected."""
+    registry = er.async_get(hass)
+    visible = (
+        entry.options.get(CONF_DEVICE_MODE, DEFAULTS[CONF_DEVICE_MODE])
+        == DEVICE_MODE_SEPARATE
+    )
+    domains = {
+        "number": PROFILE_NUMBER_KEYS,
+        "select": PROFILE_SELECT_KEYS,
+    }
+    for domain, keys in domains.items():
+        for key in keys:
+            unique_id = f"{entry.entry_id}_mobile_{key}"
+            entity_id = registry.async_get_entity_id(domain, DOMAIN, unique_id)
+            if entity_id is None:
+                continue
+            registry_entry = registry.async_get(entity_id)
+            if registry_entry is None or registry_entry.hidden_by == RegistryEntryHider.USER:
+                continue
+            hidden_by = None if visible else RegistryEntryHider.INTEGRATION
+            if registry_entry.hidden_by != hidden_by:
+                registry.async_update_entity(entity_id, hidden_by=hidden_by)
 
 
 class SnowfallEntityMixin:
     """Mixin with shared config-entry and device support."""
 
     _entry: ConfigEntry
+    _device_role: str
 
-    def _init_snowfall(self, entry: ConfigEntry, unique_id_suffix: str) -> None:
+    def _init_snowfall(
+        self,
+        entry: ConfigEntry,
+        unique_id_suffix: str,
+        device_role: str = DEVICE_MAIN,
+    ) -> None:
         """Initialize common entity properties."""
         self._entry = entry
+        self._device_role = device_role
         self._attr_unique_id = f"{entry.entry_id}_{unique_id_suffix}"
 
     @property
     def device_info(self) -> DeviceInfo:
-        """Group every Snowfall entity under one Home Assistant device."""
+        """Group entities into their logical Snowfall device."""
+        names = {
+            DEVICE_MAIN: "Snowfall",
+            DEVICE_DESKTOP: "Snowfall Desktop",
+            DEVICE_MOBILE: "Snowfall Mobile",
+        }
+        identifier = (
+            self._entry.entry_id
+            if self._device_role == DEVICE_MAIN
+            else f"{self._entry.entry_id}_{self._device_role}"
+        )
         return DeviceInfo(
-            identifiers={(DOMAIN, self._entry.entry_id)},
-            name="Snowfall",
+            identifiers={(DOMAIN, identifier)},
+            name=names[self._device_role],
             manufacturer="ALSHEVSKIJ",
             model="Home Assistant FX",
             sw_version="2026.11.3",
@@ -92,6 +145,8 @@ class SnowfallEntityMixin:
         """Subscribe to changes made by sibling entities."""
         await super().async_added_to_hass()
         self._subscribe_to_updates()
+        if self._device_role == DEVICE_MOBILE:
+            update_mobile_entities_visibility(self.hass, self._entry)
 
     @callback
     def _subscribe_to_updates(self) -> None:

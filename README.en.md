@@ -9,7 +9,7 @@ Snowfall is a custom integration that adds an animated falling snow effect direc
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.11.3-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-2026.11.4-blue" alt="Version">
   <img src="https://img.shields.io/badge/HACS-Custom%20Repository-41BDF5" alt="HACS">
   <img src="https://img.shields.io/github/license/alshevskij/hass-snowfall" alt="License">
   <img src="https://img.shields.io/github/stars/alshevskij/hass-snowfall?style=flat" alt="GitHub Stars">
@@ -20,7 +20,7 @@ Snowfall is a custom integration that adds an animated falling snow effect direc
 - Animated snow directly in the Home Assistant interface (on absolutely any page).
 - A switch to turn snowfall on and off.
 - Three built‑in operating modes: **New Year’s** (snow falls only from December to February), **Year‑round** and **Month selection**.
-- 12 separate switches for each month of the year. They are active and used only in the **Month selection** mode.
+- 12 separate switches for each month of the year, numbered from 1 to 12. They are active and used only in the **Month selection** mode.
 - Setting the number, speed, size, transparency and appearance of snowflakes.
 - Four snowfall presets: light, normal, heavy and blizzard. Presets adjust overall intensity without overwriting manual slider values.
 - Four snowflake styles: dots, six-armed snowflakes, crystals and mixed.
@@ -56,10 +56,27 @@ In HACS, select the **Integration** category.
 2. Copy the `custom_components/snowfall` folder to the `custom_components` directory of your Home Assistant.
 3. Restart Home Assistant.
 
+## Devices and settings profiles
+
+The integration creates three logical Home Assistant devices:
+
+- **Snowfall** — global controls: enable/disable the effect, snowfall schedule, device settings mode, and page allow/block lists.
+- **Snowfall Desktop** — visual settings for computers: flake count, speed, size and opacity, appearance, intensity preset, wind, and FPS.
+- **Snowfall Mobile** — an independent set of the same visual settings for phones and tablets.
+
+The **Separate device settings** switch controls the profile mode:
+
+- **Off** — every browser uses the Snowfall Desktop profile. Snowfall Mobile controls are automatically hidden, while their saved values are preserved.
+- **On** — computers use Snowfall Desktop, while phones and tablets use Snowfall Mobile. The client type is detected in the browser.
+
+During the update, existing visual settings are migrated to the Desktop profile. Existing entity IDs are preserved, so previously configured cards and automations should not need to be rebuilt. A separate Mobile profile is initialized with default values.
+
+Desktop and Mobile profile diagnostic sensors are visible in the standard entity list and expose the configuration attributes consumed by the integration's JavaScript renderer.
+
 ## Configuration and integration entities:
 
 The main snowfall switch, added in version 2026.10.1, retains the previous ID `switch.snowfall`.
-Starting with version 2026.11.3, standard entities for managing integration are created automatically.
+Starting with version 2026.11.3, standard entities for managing the integration are created automatically. Version 2026.11.4 adds separate Desktop and Mobile profiles and improves the visibility and ordering of diagnostic sensors and month switches.
 
 | Entity | Purpose |
 |---|---|
@@ -80,6 +97,12 @@ Starting with version 2026.11.3, standard entities for managing integration are 
 | Whitelist text entity | Pages where snowfall is allowed |
 
 ### What has changed:
+
+In version 2026.11.4:
+- Independent visual settings profiles for Desktop and Mobile have been added. When separate mode is off, all clients use the Desktop profile; when enabled, computers use Desktop while phones and tablets use Mobile.
+- Existing visual settings are automatically migrated to the Desktop profile during the update. Mobile values are preserved when separate mode is disabled.
+- Desktop and Mobile profile diagnostic sensors are visible in the standard entity list and expose profile attributes to the frontend.
+- Month switches now include ordinal numbers for consistent ordering: 1. January through 12. December.
 
 In version 2026.11.3, snowfall control has been moved to a full set of Home Assistant entities (the original control was implemented via integration settings, which turned out to be very inconvenient)
 
