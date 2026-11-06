@@ -16,40 +16,40 @@
         "name": "Snowfall"
       },
       "month_1": {
-        "name": "January"
+        "name": "1. January"
       },
       "month_2": {
-        "name": "February"
+        "name": "2. February"
       },
       "month_3": {
-        "name": "March"
+        "name": "3. March"
       },
       "month_4": {
-        "name": "April"
+        "name": "4. April"
       },
       "month_5": {
-        "name": "May"
+        "name": "5. May"
       },
       "month_6": {
-        "name": "June"
+        "name": "6. June"
       },
       "month_7": {
-        "name": "July"
+        "name": "7. July"
       },
       "month_8": {
-        "name": "August"
+        "name": "8. August"
       },
       "month_9": {
-        "name": "September"
+        "name": "9. September"
       },
       "month_10": {
-        "name": "October"
+        "name": "10. October"
       },
       "month_11": {
-        "name": "November"
+        "name": "11. November"
       },
       "month_12": {
-        "name": "December"
+        "name": "12. December"
       },
       "device_profiles": {
         "name": "Separate device settings"
