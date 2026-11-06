@@ -58,9 +58,13 @@ class SnowfallProfileSensor(SnowfallEntityMixin, SensorEntity):
 
     @property
     def extra_state_attributes(self) -> dict:
+        """Expose a stable profile marker and the profile settings."""
         return {
-            key: self._options.get(
-                f"{self._device_role}_{key}", DEFAULTS[key]
-            )
-            for key in PROFILE_SETTING_KEYS
+            "snowfall_profile": self._device_role,
+            **{
+                key: self._options.get(
+                    f"{self._device_role}_{key}", DEFAULTS[key]
+                )
+                for key in PROFILE_SETTING_KEYS
+            },
         }
