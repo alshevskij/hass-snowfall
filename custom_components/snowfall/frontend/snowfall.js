@@ -6,8 +6,6 @@
   window.__haSnowfallLoaded = true;
 
   const ENTITY = "switch.snowfall";
-  const DESKTOP_PROFILE_ENTITY = "sensor.snowfall_desktop_profile";
-  const MOBILE_PROFILE_ENTITY = "sensor.snowfall_mobile_profile";
   const SETTINGS_UPDATE_INTERVAL = 500;
   const canvas = document.createElement("canvas");
   canvas.id = "ha-snowfall-canvas";
@@ -93,7 +91,12 @@
   const getProfileState = (globalEntity) => {
     const useMobile = globalEntity?.attributes?.device_mode === "separate" && isMobileClient();
     const states = getHassStates();
-    return states?.[useMobile ? MOBILE_PROFILE_ENTITY : DESKTOP_PROFILE_ENTITY];
+    if (!states) return undefined;
+
+    const profileName = useMobile ? "mobile" : "desktop";
+    return Object.values(states).find(
+      (state) => state?.attributes?.snowfall_profile === profileName
+    );
   };
 
   const updateSettings = () => {
