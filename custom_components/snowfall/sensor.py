@@ -24,7 +24,7 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up hidden profile data sensors consumed by the frontend."""
+    """Set up profile data sensors consumed by the frontend."""
     async_add_entities(
         [
             SnowfallProfileSensor(entry, DEVICE_DESKTOP),
@@ -38,7 +38,6 @@ class SnowfallProfileSensor(SnowfallEntityMixin, SensorEntity):
 
     _attr_has_entity_name = False
     _attr_entity_category = EntityCategory.DIAGNOSTIC
-    _attr_entity_registry_visible_default = False
 
     def __init__(self, entry: ConfigEntry, device_role: str) -> None:
         self._device_role = device_role
